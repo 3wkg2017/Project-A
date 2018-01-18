@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+          <link rel="stylesheet" href="{{ asset('js/app.js')}}">
+        <title>Red Meat Cafe</title>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+               
+
+                   <!--   <div class="flex-center position-ref full-height">
+                    @if (Route::has('login'))
+                        <div class="top-right links">
+                            @auth
+                                <a class="btn btn-success" href="{{ url('/home') }}">Home</a>
+                            @else
+                                <a href="{{ route('login') }}">Login</a>
+                                <a href="{{ route('register') }}">Register</a>
+                            @endauth
+                        </div>
+                @endif
+                    </div> -->
+
+            
+             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+               
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-item nav-link active" href="#">Red Meat Cafe</a>
+
+                  <a class="nav-item nav-link" href="{{ route('login') }}">Login</a>
+                  <a class="nav-item nav-link" href="{{ route('register')}}">Register</a>
+                      <a class="nav-item nav-link" href="#">Dishes</a>
+                  <a class="nav-item nav-link" href="#">Contacts</a>
+                  <p>cart</p>
+             
+                </div>
+              </div>
+            </nav>
+
+
+
+            </header>
+            <main>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>Red Meat Cafe</h1>
+                    </div>
+                </div>
+            </main>
+            <footer>
+                +3706123456
+            </footer>
+        </div>
+    </body>
+</html>
