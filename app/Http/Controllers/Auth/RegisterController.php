@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+USE App\Country;
 
 class RegisterController extends Controller
 {
@@ -39,6 +40,16 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+       $countries = Country::all();
+        return view('auth.register', [
+            'countries' => $countries
+        ]);
+      
+    }
+
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -48,9 +59,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name' => 'required|string|max:127',
+            'surname' => 'required|string|max:127',
+            'date_of_birth' => 'required|date|max:255', // need to be changed
+            'address' => 'required|string|max:127',
+            'city' => 'required|string|max:64',
+            'country' => 'required|string|max:64',
+            'phone_number' => 'required|string|max:20|regex:/^(\+)?\d+$/|unique:users',
+            'zip_code' => 'required|string|max:10',
+            'email' => 'required|string|email|max:127|unique:users',
+            'password' => 'required|string|min:8|confirmed'
         ]);
     }
 
@@ -64,6 +82,13 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
+            'date_of_birth' => $data['date_of_birth'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'phone_number' => $data['phone_number'],
+            'zip_code' => $data['zip_code'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
