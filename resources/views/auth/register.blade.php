@@ -100,7 +100,7 @@
 
                                 <select id="country" class="form-control" name="country" required autofocus>
                                     @foreach($countries as $country)
-                                    <option value="{{ $country->name }}">{{ $country->name }}</option>
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                 </select>
 
