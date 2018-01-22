@@ -11,11 +11,16 @@
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
+                           
                         </div>
                     @endif
-
-                    You are logged in!
+                  You are logged in!
+                
+                <a href="{{route('profile.edit')}}">Edit profile</a>
                 </div>
+          
+                Edit
+               </a>
             </div>
         </div>
     </div>
