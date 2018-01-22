@@ -8,7 +8,7 @@
                 <div class="panel-heading">Edit</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('profile.update', $user->id) }}">
                         {{ csrf_field() }}
 
 
