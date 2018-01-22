@@ -78,7 +78,6 @@ class Profile extends Controller
      */
     public function update(Request $request, $id)
     {
-    
       $this->validator($request);
       $updatableUser = User::findOrFail($id);
       $post = $request->except('_token');

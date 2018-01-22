@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'Profile@edit')->name('profile.edit');
 Route::post('/profile/{id}', 'Profile@update')->name('profile.update');
+Route::get('admin_area', ['middleware' => 'admin', function () {
+}]);
 
