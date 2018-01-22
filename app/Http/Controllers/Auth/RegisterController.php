@@ -91,6 +91,7 @@ class RegisterController extends Controller
             'zip_code' => $data['zip_code'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'user_type' => 1,
         ]);
     }
 }
