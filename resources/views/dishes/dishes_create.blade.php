@@ -1,8 +1,7 @@
-@extends('layouts.layout')
 @section('content')
 @extends('layouts.app')
 
-@section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -59,6 +58,19 @@
                             </div>
                         </div>
 
+   						 <div class="form-group{{ $errors->has('dish-picture') ? ' has-error' : '' }}">
+                            <label for="dish-picture" class="col-md-4 control-label">Dish picture</label>
+
+                            <div class="col-md-6">
+                                <input id="dish-picture" type="file" class="form-control" name="dish-picture" value="{{ old('dish-picture') }}" required autofocus>
+
+                                @if ($errors->has('dish-picture'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('dish-picture') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
 
                         <div class="form-group">
@@ -74,6 +86,5 @@
         </div>
     </div>
 </div>
-@endsection
 
 @endsection

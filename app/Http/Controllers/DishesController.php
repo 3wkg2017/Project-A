@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+USE Illuminate\Http\Request;
 
-class Dishes extends Controller
+class DishesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,18 +17,41 @@ class Dishes extends Controller
      */
     public function index()
     {
-        //
+        return view('dishes.dishes_create');
+    }
+
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'dish_name' => 'required|string|max:127',
+            'dish_price' => 'required|numeric|max:10',
+            'dish_description' => 'required|string|max:255', 
+            'dish_picture' => 'required|string|max:127',
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create a new user instance after a valid registration.
      *
-     * @return \Illuminate\Http\Response
+     * @param  array  $data
+     * @return \App\User
      */
-    public function create()
+    protected function create(array $data)
     {
-        //
+        return Dishes::create([
+            'dish_name' => $data['dish_name'],
+            'dish_price' => $data['dish_price'],
+            'dish_description' => $data['dish_description'],
+            'dish_picture' => $data['dish_picture'],
+           
+        ]);
+        return view('dishes.dishes_show');
+
     }
+
+
+ 
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +72,7 @@ class Dishes extends Controller
      */
     public function show($id)
     {
-        echo "Dishes show";
+        
     }
 
     /**

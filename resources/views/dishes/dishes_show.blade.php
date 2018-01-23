@@ -1,4 +1,4 @@
 @extends('layouts.layout')
 @section('content')
-<main>Dishes</main>
+<main>Dishes show</main>
 @endsection
