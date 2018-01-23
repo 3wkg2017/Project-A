@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+<main>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -11,12 +11,11 @@
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
-                           
-                        </div>
+                         </div>
                     @endif
                   You are logged in!
                 
-                <a href="{{route('profile.edit')}}">Edit profile</a>
+                <a href="{{route('profile.edit')}}"><i class="fa fa-user" aria-hidden="true"></i></a>
                 </div>
           
                 Edit
@@ -25,4 +24,5 @@
         </div>
     </div>
 </div>
+</main>
 @endsection

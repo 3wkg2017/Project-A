@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "04f92bbfe43d812c0ab8baa8d3ce65c3",
-    "content-hash": "abcde4f94866e6c8b26eac7466e9c9fb",
+    "hash": "61ea97f5f39537fca4dd2a529b59cb0a",
+    "content-hash": "0d0df97ab45d51b97300787157897d67",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -668,6 +668,56 @@
                 "trusted proxy"
             ],
             "time": "2017-06-15 17:19:42"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2017-08-15 16:48:10"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2742,56 +2792,6 @@
                 "whoops"
             ],
             "time": "2017-11-23 18:22:44"
-        },
-        {
-            "name": "fzaninotto/faker",
-            "version": "v1.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0"
-            },
-            "require-dev": {
-                "ext-intl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
-                "squizlabs/php_codesniffer": "^1.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2017-08-15 16:48:10"
         },
         {
             "name": "hamcrest/hamcrest-php",
