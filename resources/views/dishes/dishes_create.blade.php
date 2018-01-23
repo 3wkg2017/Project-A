@@ -9,7 +9,7 @@
                 <div class="panel-heading">Add new dish</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('dishes_store') }}">
                         {{ csrf_field() }}
 
 

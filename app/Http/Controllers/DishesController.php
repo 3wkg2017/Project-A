@@ -7,7 +7,7 @@ use App\Dishes;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-USE Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class DishesController extends Controller
 {
@@ -25,7 +25,7 @@ class DishesController extends Controller
     }
 
 
-    protected function validator(array $data)
+    protected function validator($data) //< ------------- SUSTOJOM CIA
     {
         return Validator::make($data, [
             'dish_name' => 'required|string|max:127',
@@ -41,11 +41,9 @@ class DishesController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create()
     {
-        
         return view('dishes.dishes_create');
-     
     }
 
 
@@ -57,12 +55,21 @@ class DishesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $data)
     {
+
         $this->validator($request);
         $post = $request->except('_token');
-        Dishes::create($post);
-        return redirect()->route('dishes.dishes_show');
+        Character::create($post);
+        return redirect()->route('index');
+
+        // dd($request);
+        return Dishes::create([
+            'dish_name' => $data['dish_name'],
+            'dish_price' => $data['dish_price'],
+            'dish_description' => $data['dish_description'],
+            'dish_picture' => $data['dish_picture'],
+          ]);
     }
 
     /**

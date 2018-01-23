@@ -77,12 +77,7 @@ To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 -->
 
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p>Design by mens Konstantinas & Hugonas <a href="" title="Design"></a></p>
-</footer>
+
 
 <script>
 $(document).ready(function(){
