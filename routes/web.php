@@ -18,8 +18,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dishes_create', 'DishesController@index')->name('dishes_create');
-
+Route::get('/dishes_create', 'DishesController@create')->name('dishes_create');
+Route::get('/dishes_show', 'DishesController@index')->name('dishes_show');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'Profile@edit')->name('profile.edit');

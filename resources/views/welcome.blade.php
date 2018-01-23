@@ -1,33 +1,8 @@
 @extends('layouts.layout')
 @section('content')
+
+
 <main>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#portfolio">MEAT</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-        <li><a href="{{ route('login') }}">LOGIN</a></li>
-        <li><a href="{{ route('register') }}">REGISTER</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="jumbotron text-center">
-  <h1>Red Meat Cafe</h1>
-  <p>We serve red meat only for real mens!</p>
-</div>
-
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">

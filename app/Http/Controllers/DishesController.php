@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Dishes;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -17,7 +18,10 @@ class DishesController extends Controller
      */
     public function index()
     {
-        return view('dishes.dishes_create');
+        $dishes = Dishes::all();
+        return view('dishes.dishes_show', [
+            'dishes' => $dishes
+        ]);
     }
 
 
@@ -39,15 +43,9 @@ class DishesController extends Controller
      */
     protected function create(array $data)
     {
-        return Dishes::create([
-            'dish_name' => $data['dish_name'],
-            'dish_price' => $data['dish_price'],
-            'dish_description' => $data['dish_description'],
-            'dish_picture' => $data['dish_picture'],
-           
-        ]);
-        return view('dishes.dishes_show');
-
+        
+        return view('dishes.dishes_create');
+     
     }
 
 
@@ -61,7 +59,10 @@ class DishesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validator($request);
+        $post = $request->except('_token');
+        Dishes::create($post);
+        return redirect()->route('dishes.dishes_show');
     }
 
     /**
