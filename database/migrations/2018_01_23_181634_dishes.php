@@ -16,9 +16,10 @@ class Dishes extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->increments('dish_id');
             $table->string('dish_name');
-            $table->string('dish_price');
+            $table->float('dish_price');
             $table->string('dish_picture');
-            $table->string('dish_description');
+            $table->longText('dish_description');
+            $table->timestamps();
         });
     }
 
