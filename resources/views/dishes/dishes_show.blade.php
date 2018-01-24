@@ -14,11 +14,16 @@
 			  <div class="card-block">
 			      <p class="card-text">{{$dish->dish_price}}</p>
 			  </div>
-			<div class="card-block">
-			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-			<i class="fa fa-trash-o" aria-hidden="true"></i>
-			<i class="fa fa-bars" aria-hidden="true"></i>
-			  </div>
+			
+				<div class="card-block">
+					<a href="{{ route('dishes_edit', $dish->id) }}">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</a>
+					<a href="{{route('dishes_destroy', $dish->id) }}">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>
+					</a>
+				</div>
+			
 			</div>
 			</div>
 			@endforeach

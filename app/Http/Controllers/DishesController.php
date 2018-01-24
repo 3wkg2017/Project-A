@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+       use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Dishes;
 use App\Http\Controllers\Controller;
@@ -86,7 +86,10 @@ class DishesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dish = Dishes::findOrFail($id);
+        return view('dishes.dishes_edit', [
+            'dish' => $dish
+        ]);
     }
 
     /**
@@ -96,9 +99,16 @@ class DishesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $data, $id)
     {
-        //
+        $dishToSave = Dishes::findOrFail($id);
+        $this->validator($data);
+        $path = $data->file('dish_picture')->storePublicly('public/dishes');
+        $post = $data->except('_token');
+        $path = $this->pathModificator($path);
+        $post['dish_picture'] = $path;
+        $dishToSave->update($post);
+        return redirect()->route('dishes_show');
     }
 
     /**
@@ -109,7 +119,12 @@ class DishesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dishToDestroy = Dishes::findOrFail($id);
+        //var_dump(storage_path());    
+        Storage::disk('public')->delete($dishToDestroy->dish_picture);
+// app/public/dishes/RYUKsOOCN9WLdM91sA1vWY7ZWgHyGrx1UUqEwnqt.jpeg
+        $dishToDestroy->delete();
+        return redirect()->route('dishes_show');
     }
 
      public function pathModificator($path){
