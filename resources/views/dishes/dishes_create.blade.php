@@ -9,64 +9,64 @@
                 <div class="panel-heading">Add new dish</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('dishes_store') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('dishes_store') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
 
-                        <div class="form-group{{ $errors->has('dish-name') ? ' has-error' : '' }}">
-                            <label for="dish-name" class="col-md-4 control-label">Dish name</label>
+                        <div class="form-group{{ $errors->has('dish_name') ? ' has-error' : '' }}">
+                            <label for="dish_name" class="col-md-4 control-label">Dish name</label>
 
                             <div class="col-md-6">
-                                <input id="dish-name" type="text" class="form-control" name="dish-name" value="{{ old('dish-name') }}" required autofocus>
+                                <input id="dish_name" type="text" class="form-control" name="dish_name" value="{{ old('dish_name') }}" required autofocus>
 
-                                @if ($errors->has('dish-name'))
+                                @if ($errors->has('dish_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('dish-name') }}</strong>
+                                        <strong>{{ $errors->first('dish_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                          <div class="form-group{{ $errors->has('dish-price') ? ' has-error' : '' }}">
-                            <label for="dish-price" class="col-md-4 control-label">Dish price</label>
+                          <div class="form-group{{ $errors->has('dish_price') ? ' has-error' : '' }}">
+                            <label for="dish_price" class="col-md-4 control-label">Dish price</label>
 
                             <div class="col-md-6">
-                                <input id="dish-price" type="number" class="form-control" name="dish-price" value="{{ old('dish-price') }}" required autofocus>
+                                <input id="dish_price" type="number" step="0.01" class="form-control" name="dish_price" value="{{ old('dish_price') }}" required autofocus>
 
-                                @if ($errors->has('dish-price'))
+                                @if ($errors->has('dish_price'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('dish-price') }}</strong>
+                                        <strong>{{ $errors->first('dish_price') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
 
-                         <div class="form-group{{ $errors->has('dish-description') ? ' has-error' : '' }}">
-                            <label for="dish-description" class="col-md-4 control-label">Dish Description</label>
+                         <div class="form-group{{ $errors->has('dish_description') ? ' has-error' : '' }}">
+                            <label for="dish_description" class="col-md-4 control-label">Dish Description</label>
 
                          <div class="col-md-6">
-                                <textarea id="dish-description" type="text" class="form-control" name="dish-description" required>
-                                {{ old('dish-description') }}
+                                <textarea id="dish_description" type="text" class="form-control" name="dish_description" required>
+                                {{ old('dish_description') }}
                             	</textarea>
 
-                                @if ($errors->has('dish-description'))
+                                @if ($errors->has('dish_description'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('dish-description') }}</strong>
+                                        <strong>{{ $errors->first('dish_description') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-   						 <div class="form-group{{ $errors->has('dish-picture') ? ' has-error' : '' }}">
-                            <label for="dish-picture" class="col-md-4 control-label">Dish picture</label>
+   						 <div class="form-group{{ $errors->has('dish_picture') ? ' has-error' : '' }}">
+                            <label for="dish_picture" class="col-md-4 control-label">Dish picture</label>
 
                             <div class="col-md-6">
-                                <input id="dish-picture" type="file" class="form-control" name="dish-picture" value="{{ old('dish-picture') }}" required autofocus>
+                                <input id="dish_picture" type="file" class="form-control" name="dish_picture" value="{{ old('dish_picture') }}" required autofocus>
 
-                                @if ($errors->has('dish-picture'))
+                                @if ($errors->has('dish_picture'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('dish-picture') }}</strong>
+                                        <strong>{{ $errors->first('dish_picture') }}</strong>
                                     </span>
                                 @endif
                             </div>

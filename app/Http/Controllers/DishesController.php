@@ -25,14 +25,18 @@ class DishesController extends Controller
     }
 
 
-    protected function validator($data) //< ------------- SUSTOJOM CIA
+    protected function validator(Request $data) 
     {
-        return Validator::make($data, [
+       
+        return Validator::make($data->all(), [
             'dish_name' => 'required|string|max:127',
             'dish_price' => 'required|numeric|max:10',
             'dish_description' => 'required|string|max:255', 
             'dish_picture' => 'required|string|max:127',
         ]);
+
+
+
     }
 
     /**
@@ -45,10 +49,7 @@ class DishesController extends Controller
     {
         return view('dishes.dishes_create');
     }
-
-
  
-
     /**
      * Store a newly created resource in storage.
      *
@@ -57,19 +58,13 @@ class DishesController extends Controller
      */
     public function store(Request $data)
     {
-
-        $this->validator($request);
-        $post = $request->except('_token');
-        Character::create($post);
-        return redirect()->route('index');
-
-        // dd($request);
-        return Dishes::create([
-            'dish_name' => $data['dish_name'],
-            'dish_price' => $data['dish_price'],
-            'dish_description' => $data['dish_description'],
-            'dish_picture' => $data['dish_picture'],
-          ]);
+        $this->validator($data);
+        $path = $data->file('dish_picture')->storePublicly('public/dishes');
+        $post = $data->except('_token');
+        $path = $this->pathModificator($path);
+        $post['dish_picture'] = $path;
+        Dishes::create($post);
+        return redirect()->route('dishes_show');
     }
 
     /**
@@ -116,4 +111,11 @@ class DishesController extends Controller
     {
         //
     }
+
+     public function pathModificator($path){
+           $path = explode('/', $path);
+           $path[0] = 'storage';
+           $path = implode('/', $path);
+        return $path;       
+        }
 }
