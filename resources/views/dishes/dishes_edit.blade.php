@@ -60,10 +60,10 @@
    						 <div class="form-group{{ $errors->has('dish_picture') ? ' has-error' : '' }}">
 							<img id="editable_image" class="card-img-top img-responsive center-block" src="{{$dish->dish_picture}}" alt=""> 
 							<br />
-                            <label for="dish_picture" class="col-md-4 control-label">Dish picture</label>
+                            <label for="dish_picture" class="col-md-4 control-label">New Dish picture</label>
 
                             <div class="col-md-6">
-                                <input id="dish_picture" type="file" class="form-control" name="dish_picture" value="{{ old('dish_picture', $dish->dish_picture) }}" required autofocus>
+                                <input id="dish_picture" type="file" class="form-control" name="dish_picture" value="{{ old('dish_picture', $dish->dish_picture) }}" autofocus>
 
                                 @if ($errors->has('dish_picture'))
                                     <span class="help-block">

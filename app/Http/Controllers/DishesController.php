@@ -61,7 +61,7 @@ class DishesController extends Controller
         $this->validator($data);
         $path = $data->file('dish_picture')->storePublicly('public/dishes');
         $post = $data->except('_token');
-        $path = $this->pathModificator($path);
+        $path = $this->pathModificator($path, 's');
         $post['dish_picture'] = $path;
         Dishes::create($post);
         return redirect()->route('dishes_show');
@@ -103,12 +103,22 @@ class DishesController extends Controller
     {
         $dishToSave = Dishes::findOrFail($id);
         $this->validator($data);
-        $path = $data->file('dish_picture')->storePublicly('public/dishes');
         $post = $data->except('_token');
-        $path = $this->pathModificator($path);
-        $post['dish_picture'] = $path;
-        $dishToSave->update($post);
-        return redirect()->route('dishes_show');
+
+        if(!isset($post['dish_picture'])){ // old web link
+            $dishToSave->update($post);
+            
+           
+        } else { // new image from PC
+            $path = $data->file('dish_picture')->storePublicly('public/dishes'); 
+            $path = $this->pathModificator($path, 's');
+            $post['dish_picture'] = $path;
+            $dishToSave->update($post);
+        }
+
+
+         return redirect()->route('dishes_show');
+      
     }
 
     /**
@@ -120,17 +130,24 @@ class DishesController extends Controller
     public function destroy($id)
     {
         $dishToDestroy = Dishes::findOrFail($id);
-        //var_dump(storage_path());    
-        Storage::disk('public')->delete($dishToDestroy->dish_picture);
-// app/public/dishes/RYUKsOOCN9WLdM91sA1vWY7ZWgHyGrx1UUqEwnqt.jpeg
-        $dishToDestroy->delete();
-        return redirect()->route('dishes_show');
+        $path = $dishToDestroy['dish_picture'];
+        $path = $this->pathModificator($path, 'd');
+   //     dump($path);
+       Storage::disk('public')->delete($path);
+       $dishToDestroy->delete();
+       return redirect()->route('dishes_show');
     }
 
-     public function pathModificator($path){
-           $path = explode('/', $path);
-           $path[0] = 'storage';
-           $path = implode('/', $path);
+     public function pathModificator($path, $direction){
+       
+        $path = explode('/', $path);
+        if($direction == 'd'){
+            $path[0] = '';
+        } else {
+           $path[0] = 'storage';  
+        }
+        $path = implode('/', $path);
         return $path;       
         }
 }
+
