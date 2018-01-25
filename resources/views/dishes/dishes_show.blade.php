@@ -13,8 +13,11 @@
 			  </div>
 			  <div class="card-block">
 			      <p class="card-text">{{$dish->dish_price}}</p>
+			  	  <button class="btn btn-success">Add to Cart</button>
+			  	  <br>
 			  </div>
-			
+
+				@if(Auth::user()->role == 'admin')
 				<div class="card-block">
 					<a href="{{ route('dishes_edit', $dish->id) }}">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -23,7 +26,7 @@
 						<i class="fa fa-trash-o" aria-hidden="true"></i>
 					</a>
 				</div>
-			
+				@endif
 			</div>
 			</div>
 			@endforeach

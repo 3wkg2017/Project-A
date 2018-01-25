@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+use Illuminate\Support\Facades\Auth;
+
 class IsAdmin
 {
     /**
@@ -13,10 +15,18 @@ class IsAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-  public function handle($request, Closure $next)
+    public function handle($request, Closure $next)
     {
-         if (Auth::user() &&  Auth::user()->isAdmin()) {
-                return redirect('/home');  //<------------ BAIGEM CIA 
-         } 
+        $user = Auth::user(); // false
+        if($user){
+            if($user->role != 'admin') {
+                return abort(403, 'You are not admin!');
+            }
+        }
+        else if(Auth::guest()) {
+            return abort(403);
+        }
+
         return $next($request);
+    }
 }

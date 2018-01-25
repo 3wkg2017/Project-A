@@ -13,12 +13,19 @@
                             {{ session('status') }}
                          </div>
                     @endif
-                  You are logged in!
+               
                 
-                <a href="{{route('profile.edit')}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
+                 @if(Auth::user()->role == 'admin')
+                          <a href="{{route('dishes_create')}}"><button class="btn btn-success">Cook Dish</button></a>
+                          <button class="btn btn-success hide">View Orders</button>
+                          <button class="btn btn-success hide">Edit Customers</button>
+                 @endif
+
+
                 </div>
           
-                Edit
+              
                </a>
             </div>
         </div>
