@@ -27,6 +27,10 @@ Route::get('/dishes_destroy/{dish_id}', 'DishesController@destroy')->name('dishe
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'Profile@edit')->name('profile.edit');
 Route::post('/profile/{id}', 'Profile@update')->name('profile.update');
+
+Route::resource('/carts', 'CartsController');
+Route::resource('/orders', 'OrdersController');
+
 // Route::get('admin_area', ['middleware' => 'admin', function () {
 // }]);
 

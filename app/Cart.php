@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    //
+    
+
+      public function dishes()
+    {
+        return $this->hasMany('App\Dishes');
+    }
+
 }

@@ -10,4 +10,7 @@ class Dishes extends Model
         'dish_name', 'dish_price', 'dish_picture', 'dish_description'
     ];
     protected $table = 'dishes';
+
+
+
 }
