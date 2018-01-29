@@ -10,7 +10,7 @@ class Cart extends Model
 
       public function dishes()
     {
-        return $this->hasMany('App\Dishes');
+        return $this->belongsTo('App\Dishes', 'dish_id');
     }
 
 }

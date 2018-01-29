@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use App\Cart;
 use App\Dishes;
 use Illuminate\Http\Request;
@@ -13,15 +13,35 @@ class CartsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+     public function index()
     {
-        $carts = Cart::all();
-        $dish = Dishes::all();
+       
+        $user = \Auth::user();
+        $currentToken = csrf_token();
+        $carts = Cart::where('token', $currentToken)->get();
 
-        return view('carts.index', [
-            'dish' => $dish,
-            'carts' => $carts
-        ]);
+        //$carts = Cart::find($currentToken);
+        //$carts->dishes()->where('id', $carts->dish_id)->get();
+        // dd($carts);
+        //$user = App\User::find(1);
+        //$user->posts()->where('active', 1)->get();
+
+        // if(isset($carts)){
+        //     foreach ($carts as  $cart) {
+        //         $dishes = Dishes::where('id', $cart->dish_id)->get();
+        //     }
+             return view('carts.index', [
+            // 'dishes' => $dishes,
+             'carts' => $carts
+             ]);
+
+        // } else {
+        //     echo 'No dishes selected';
+        // }
+
+        
+
     }
 
     /**
@@ -42,12 +62,10 @@ class CartsController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request);
         $cart = new Cart;
         $cart->token = $request->_token;
         $cart->dish_id = $request->dish_id;
         $cart->save();
-
         $dish = Dishes::where('id', $request->dish_id)->first();
         $cart->price = $dish->price; 
         echo json_encode($cart);

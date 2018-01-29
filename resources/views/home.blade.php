@@ -14,9 +14,13 @@
                          </div>
                     @endif
                
+                @if(Auth::user()-> role == 'user')
+                  <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
+                  <a href="{{route('carts.index')}}"><button class="btn btn-success">View Order</button></a>
+                @endif 
                 
-                <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
                  @if(Auth::user()->role == 'admin')
+                          <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
                           <a href="{{route('dishes_create')}}"><button class="btn btn-success">Cook Dish</button></a>
                           <button class="btn btn-success hide">View Orders</button>
                           <button class="btn btn-success hide">Edit Customers</button>
