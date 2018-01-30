@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-       use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Dishes;
 use App\Http\Controllers\Controller;
@@ -16,10 +16,18 @@ class DishesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // public function index()
+    // {
+    //     $dishes = Dishes::all();
+    //     return view('dishes.dishes_show', [
+    //         'dishes' => $dishes
+    //     ]);
+    // }
+
+  public function index()
     {
         $dishes = Dishes::all();
-        return view('dishes.dishes_show', [
+        return view('welcome', [
             'dishes' => $dishes
         ]);
     }

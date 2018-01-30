@@ -22,7 +22,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#myPage">Logo</a>
+		      <a class="navbar-brand" href="#myPage">RMC</a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav navbar-right">
@@ -31,7 +31,10 @@
 		        <li><a href="#contact">CONTACT</a></li>
 		        <li><a href="{{ route('login') }}">LOGIN</a></li>
 		        <li><a href="{{ route('register') }}">REGISTER</a></li>
-		      </ul>
+		        <li><a  id="cart" href="{{ route('carts.index') }}">Cart (<span  class="cart-size">0</span>)-<span class="cart-total">0</span>$</a></li>
+		       </ul>
+		 
+		      
 		    </div>
 		  </div>
 		</nav>
@@ -48,5 +51,6 @@
   </a>
   <p>Design by mens Konstantinas & Hugonas <a href="" title="Design"></a></p>
 </footer>
+ @yield('js')
 </body>
 </html>

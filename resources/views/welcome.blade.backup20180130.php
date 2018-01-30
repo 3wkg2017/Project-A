@@ -1,10 +1,12 @@
 @extends('layouts.layout')
 @section('content')
-<main class="container-fluid text-center">
+
+
+<main>
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-8">
       <h2>About</h2><br>
       <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -13,7 +15,7 @@
    </div>
 </div>
 
-
+<
 <!-- Container (Portfolio Section) -->
 <div id="portfolio" class="container-fluid text-center bg-grey">
   <h2>Only Fresh meat</h2><br>
@@ -45,20 +47,11 @@
 </div>
 
 
-<!-- Dishes  -->
-<div id="dishes" class="container-fluid text-center bg-grey">
-  <h2 class="text-center">Dishes</h2>
-
-      @include('dishes.dishes_show')
- 
-</div>
-
-
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
   <h2 class="text-center">CONTACT</h2>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-5">
       <p><span class="glyphicon glyphicon-map-marker"></span>Vilnius, Lithuania</p>
       <p><span class="glyphicon glyphicon-phone"></span>+3706123456</p>
       <p><span class="glyphicon glyphicon-envelope"></span> info@redmeatcafe.lt</p>
@@ -83,6 +76,9 @@ marker.setMap(map);
 To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 -->
+
+
+
 <script>
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
@@ -106,6 +102,7 @@ $(document).ready(function(){
       });
     } // End if
   });
+
   $(window).scroll(function() {
     $(".slideanim").each(function(){
       var pos = $(this).offset().top;
@@ -118,4 +115,5 @@ $(document).ready(function(){
   });
 })
 </script>
+
 @endsection

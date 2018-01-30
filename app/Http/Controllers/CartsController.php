@@ -5,6 +5,7 @@ use App\User;
 use App\Cart;
 use App\Dishes;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CartsController extends Controller
 {
@@ -35,6 +36,8 @@ class CartsController extends Controller
             // 'dishes' => $dishes,
              'carts' => $carts
              ]);
+
+
 
         // } else {
         //     echo 'No dishes selected';
@@ -67,8 +70,14 @@ class CartsController extends Controller
         $cart->dish_id = $request->dish_id;
         $cart->save();
         $dish = Dishes::where('id', $request->dish_id)->first();
-        $cart->price = $dish->price; 
-        echo json_encode($cart);
+        $dishes = Dishes::all();
+        $cart->price = $dish->dish_price; 
+        //$carts=json_encode($cart);
+        return new JsonResponse($cart);
+        // return view('welcome', [
+        //     'dishes' => $dishes,
+        //    //  'carts' => $carts
+        //      ]);
     }
 
     /**
@@ -113,6 +122,9 @@ class CartsController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        //dd($cart);
+        //$cartToDestroy = Cart::findOrFail($cart);
+        $cart->delete();
+        return redirect()->route('carts.index');
     }
 }

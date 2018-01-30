@@ -11,15 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', 'DishesController@index')->name('welcome');
 
 Auth::routes();
 
 Route::get('/dishes_create', 'DishesController@create')->name('dishes_create')->middleware('isAdmin');
-Route::get('/dishes_show', 'DishesController@index')->name('dishes_show');
+//Route::get('/dishes_show', 'DishesController@index')->name('dishes_show');
 Route::post('/dishes_store', 'DishesController@store')->name('dishes_store')->middleware('isAdmin');
 Route::get('/dishes_edit/{dish_id}', 'DishesController@edit')->name('dishes_edit')->middleware('isAdmin');
 Route::post('/dishes_update/{dish_id}', 'DishesController@update')->name('dishes_update')->middleware('isAdmin');
@@ -31,6 +32,7 @@ Route::post('/profile/{id}', 'Profile@update')->name('profile.update');
 Route::resource('/carts', 'CartsController');
 Route::resource('/orders', 'OrdersController');
 
+//Route::get('/', 'DishesController@toHome')->name('welcome');
 // Route::get('admin_area', ['middleware' => 'admin', function () {
 // }]);
 
