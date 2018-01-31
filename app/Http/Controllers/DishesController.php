@@ -72,7 +72,7 @@ class DishesController extends Controller
         $path = $this->pathModificator($path, 's');
         $post['dish_picture'] = $path;
         Dishes::create($post);
-        return redirect()->route('dishes_show');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -112,20 +112,16 @@ class DishesController extends Controller
         $dishToSave = Dishes::findOrFail($id);
         $this->validator($data);
         $post = $data->except('_token');
-
         if(!isset($post['dish_picture'])){ // old web link
             $dishToSave->update($post);
-            
-           
         } else { // new image from PC
             $path = $data->file('dish_picture')->storePublicly('public/dishes'); 
             $path = $this->pathModificator($path, 's');
             $post['dish_picture'] = $path;
             $dishToSave->update($post);
         }
-
-
-         return redirect()->route('dishes_show');
+        return redirect()->route('welcome');
+         //return redirect()->route('dishes_show');
       
     }
 
@@ -143,7 +139,10 @@ class DishesController extends Controller
    //     dump($path);
        Storage::disk('public')->delete($path);
        $dishToDestroy->delete();
-       return redirect()->route('dishes_show');
+      
+        return redirect()->route('welcome');
+
+       //return redirect()->route('dishes_show');
     }
 
      public function pathModificator($path, $direction){
