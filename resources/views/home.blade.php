@@ -16,7 +16,7 @@
                
                 @if(Auth::user()-> role == 'user')
                   <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
-                  <a href="{{route('carts.index')}}"><button class="btn btn-success">View Order</button></a>
+                  <a href="{{route('orders.index')}}"><button class="btn btn-success">View Order</button></a>
                 @endif 
                 
                  @if(Auth::user()->role == 'admin')

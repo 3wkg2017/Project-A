@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('content')
 	<main class="container">
 	<div class="row">
@@ -31,12 +31,16 @@
 					 <div class="card-block">
 					  	<p class="card-text">{{$dish->dish_price}}</p>
 
-						@if(Auth::check() && Auth::user()->role == 'user') <--------------------------------BAIGEM CIA
-								<form action="{{route('orders.create', $carts)}}" method="post">
+						@if(Auth::check()) 
+								<form action="{{ route('orders.store') }}" method="post">
+									{{ csrf_field() }}
 					  				<button class="btn btn-success">Check out</button>
+									
 					  			</form>
 						@else
-								{{route('login'}}
+								<a href="{{ route('login') }}">
+									<button class="btn btn-default">Check out</button>
+								</a>
 						@endif
 
 					  	
