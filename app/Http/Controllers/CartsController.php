@@ -22,6 +22,8 @@ class CartsController extends Controller
         $currentToken = csrf_token();
         $carts = Cart::where('token', $currentToken)->get();
 
+
+
         //$carts = Cart::find($currentToken);
         //$carts->dishes()->where('id', $carts->dish_id)->get();
         // dd($carts);
@@ -32,6 +34,7 @@ class CartsController extends Controller
         //     foreach ($carts as  $cart) {
         //         $dishes = Dishes::where('id', $cart->dish_id)->get();
         //     }
+
              return view('carts.index', [
             // 'dishes' => $dishes,
              'carts' => $carts
@@ -122,8 +125,6 @@ class CartsController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //dd($cart);
-        //$cartToDestroy = Cart::findOrFail($cart);
         $cart->delete();
         return redirect()->route('carts.index');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\User;
 use App\Order;
+use App\Dishes;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -51,12 +52,21 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
+
         $currentToken = csrf_token();
-        
         $user = Auth::user();
         
-        $tax_amount = 951; //  <- NOT FINISHED, NEED TO CALCULATE
-        $total_amount = 753; //  <- NOT FINISHED, NEED TO CALCULATE
+        $carts = Cart::whereNull('order_id')->where('token', $currentToken)->get();
+        $total_amount = 0;
+        foreach($carts as $cart){
+            $dish = $cart->dishes;
+            $dish_price = $dish->dish_price;
+            $total_amount += $dish_price; 
+        }
+
+        
+        $tax_amount = $total_amount*0.21; 
+        
 
         $orderToSave =[
             'tax_amount' => $tax_amount,
@@ -66,35 +76,26 @@ class OrdersController extends Controller
 
         $order = Order::create($orderToSave);
         $order_id = $order->id;
+        $carts = Cart::whereNull('order_id')->where('token', $currentToken)->update(['order_id' =>  $order_id]);
 
- 
-        // foreach ($carts as $cart) {
-        //     Cart::update('order_id', $order_id);
-        // }
-
-         $carts = Cart::whereNull('order_id')->where('user_token', $currentToken)->update(['order_id' =>  $order_id]);
-        // 2. set new order_id to carts
+        //$carts = Cart::where('order_id', $order_id)->get();
 
 
+        // user->order | order->cart | dish->cart
 
-        // this stuff we will take from blade:
-        // $user = Auth::user();
-        //    foreach($carts as $cart){
-        //         $dishes = $cart->dishes()->get();    
-        //     }
+        $orders = Order::where('user_id', $user->id)->get();
+
+        // $orderM = new Order();
+        // $carts = $orderM->carts();
+        // $cartsM = new Cart();
+        // $dishes = $cartsM->dishes();
+
+         return view('orders.index', [
+            'orders' => $orders,
+            'carts' => $carts,
+            'user' => $user 
+         ]);    
         
-
-
-        //   return view('orders.index', [
-        //     'carts' => $carts
-        // ]);
-//------------------------------------------------------------------
-      //  dump($carts);
-       // dump($user);
-       // dd($dishes);
-
-
-        //Order::create($request);
         //return redirect()->route('orders.index');
     }
 

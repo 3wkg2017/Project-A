@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div id="orders" class="container-fluid text-center">
- <div class="row">
-			<div class="col-xs-12 col-md-12">
+
 				<table>
 					<tr>
 						<th>
@@ -40,29 +39,30 @@
 
 					</tr>		
 					
-					@foreach($carts)
+					@foreach($orders as $order)
 
 						<tr>
 							<td>
-								
-							</td>
-							<td>
-						
-							</td>
-							<td>
-
+								{{$loop->iteration}}
 							</td>
 							<td>
 								
 							</td>
 							<td>
+								{{$user->name}}
+							</td>
 								
+							<td>
+								{{$user->address}}
 							</td>
 							<td>
-								
+								{{$order->total_amount}}
 							</td>
 							<td>
-								
+								{{$order->tax_amount}}
+							</td>
+							<td>
+								{{$order->created_at}}
 							</td>
 
 
@@ -85,8 +85,8 @@
 					@endforeach
 									
 					</table>
-				</div> 
-			</div> 
+			
+	
 
 </div>
 @endsection

@@ -33,6 +33,11 @@ class DishesController extends Controller
     }
 
 
+    public function dishesByCart($id)
+    {
+        return $dishes = Dishes::findOrFail('$id');
+    }
+
     protected function validator(Request $data) 
     {
        
