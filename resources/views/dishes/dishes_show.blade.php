@@ -11,11 +11,11 @@
 			  </div>
 			  <div class="card-block">
 			      <p class="card-text">{{$dish->dish_price}}</p>
-			  	 <form class="cart_form" method="POST" action="{{route('carts.store')}}"> 
+			  	 <form class="cart_form" method="POST" action="{{route('carts.store')}}">
 			  	  <button class="btn btn-success">Add to Cart</button>
 			  	  	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 			  	  	<input type="hidden" name="dish_id" value="{{$dish->id}}">
-			  	 </form> 
+			  	 </form>
 			  	 <br>
 			  </div>
 				@if(Auth::check() && Auth::user()->role == 'admin')
@@ -35,12 +35,10 @@
 </div>
 
 @section('js')
-
-
   <script type="text/javascript">
     $(document).ready(function(){
         $('.btn').on('click', function(e){
-            //console.log('clicked cart');
+            // console.log('clicked cart');
             e.preventDefault();
 			var form = $(this).parent();
             //console.log(form.serialize());
@@ -49,7 +47,7 @@
                 method: 'POST',
                 data: form.serialize(),
                 success: function(data){
-           
+
                     var cartTotal = $('#cart .cart-total'),
                         cartSize = $('#cart .cart-size'),
                         currentPrice = cartTotal.text(),
@@ -58,25 +56,22 @@
                         totalSize = (currentSize*1) + 1;
 
                         cartTotal.text(totalPrice.toFixed(2));
-                        cartSize.text(totalSize); 
+                        cartSize.text(totalSize);
 
-                    console.log(data);
+                  //  console.log(data);
                 },
                 error: function(msg){
-                    console.log(msg.responseText);
+                      console.log(msg.responseText);
                     $('html').prepend(msg.responseText);
                 }
             })
 
             /* form.ajaxForm({
-                url: form.attr('action'), 
+                url: form.attr('action'),
                 type: 'post'
             }); */
         });
 
     });
     </script>
-
-
-
 @endsection

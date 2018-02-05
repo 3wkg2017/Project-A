@@ -13,23 +13,21 @@
                             {{ session('status') }}
                          </div>
                     @endif
-               
+
                 @if(Auth::user()-> role == 'user')
                   <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
                   <a href="{{route('orders.index')}}"><button class="btn btn-success">View Order</button></a>
-                @endif 
-                
+                @endif
+
                  @if(Auth::user()->role == 'admin')
                           <a href="{{route('profile.edit')}}"><button class="btn btn-success">Edit Profile</button></a>
                           <a href="{{route('dishes_create')}}"><button class="btn btn-success">Cook Dish</button></a>
+                          <a href="{{route('profile.users')}}"><button class="btn btn-success">Users</button></a>
                           <button class="btn btn-success hide">View Orders</button>
                           <button class="btn btn-success hide">Edit Customers</button>
                  @endif
-
-
                 </div>
-          
-              
+
                </a>
             </div>
         </div>

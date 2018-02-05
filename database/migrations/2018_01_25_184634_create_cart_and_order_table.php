@@ -13,12 +13,12 @@ class CreateCartAndOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) { 
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();;
             $table->float('total_amount'); // static due of invoice
             $table->float('tax_amount');   // static due of invoice
-            $table->rememberToken();
+      //      $table->rememberToken();
             $table->timestamps();
         });
 
@@ -28,9 +28,8 @@ class CreateCartAndOrderTable extends Migration
             $table->integer('order_id')->nullable()->unsigned();
             $table->integer('dish_id')->unsigned();
             $table->timestamps();
-         
-        });
 
+        });
 
         Schema::table('orders', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -40,10 +39,10 @@ class CreateCartAndOrderTable extends Migration
         Schema::table('carts', function (Blueprint $table) {
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('dish_id')->references('id')->on('dishes')->onDelete('cascade');
-       
+
            });
 
-      
+
     }
 
     /**

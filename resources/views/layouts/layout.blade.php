@@ -33,8 +33,8 @@
 		        <li><a href="{{ route('register') }}">REGISTER</a></li>
 		        <li><a  id="cart" href="{{ route('carts.index') }}">Cart (<span  class="cart-size">0</span>)-<span class="cart-total">0</span>$</a></li>
 		       </ul>
-		 
-		      
+
+
 		    </div>
 		  </div>
 		</nav>

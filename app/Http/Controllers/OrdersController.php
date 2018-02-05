@@ -28,10 +28,14 @@ class OrdersController extends Controller
         // $orders->Order:all();
         // $carts->$user->posts()->where('active', 1)->get();
         // $dishes->
-
-        return view('orders.index');
-
-        
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->get();
+        $carts = Cart::all();
+        return view('orders.index', [
+           'orders' => $orders,
+           'carts' => $carts,
+           'user' => $user
+        ]);
     }
 
     /**
@@ -54,19 +58,19 @@ class OrdersController extends Controller
     {
 
         $currentToken = csrf_token();
+
         $user = Auth::user();
-        
+
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->get();
+
         $total_amount = 0;
         foreach($carts as $cart){
             $dish = $cart->dishes;
             $dish_price = $dish->dish_price;
-            $total_amount += $dish_price; 
+            $total_amount += $dish_price;
         }
 
-        
-        $tax_amount = $total_amount*0.21; 
-        
+        $tax_amount = $total_amount*0.21;
 
         $orderToSave =[
             'tax_amount' => $tax_amount,
@@ -75,6 +79,7 @@ class OrdersController extends Controller
         ];
 
         $order = Order::create($orderToSave);
+
         $order_id = $order->id;
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->update(['order_id' =>  $order_id]);
 
@@ -84,19 +89,21 @@ class OrdersController extends Controller
         // user->order | order->cart | dish->cart
 
         $orders = Order::where('user_id', $user->id)->get();
-
+        // $carts = Cart::where('order_id', $order_id)->get();
+        $carts = Cart::all();
         // $orderM = new Order();
         // $carts = $orderM->carts();
         // $cartsM = new Cart();
         // $dishes = $cartsM->dishes();
 
-         return view('orders.index', [
-            'orders' => $orders,
-            'carts' => $carts,
-            'user' => $user 
-         ]);    
-        
-        //return redirect()->route('orders.index');
+
+          return view('orders.index', [
+             'orders' => $orders,
+             'carts' => $carts,
+             'user' => $user
+          ]);
+
+      //  //return redirect()->route('orders.index');
     }
 
     /**

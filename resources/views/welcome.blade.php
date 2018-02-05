@@ -1,6 +1,14 @@
 @extends('layouts.layout')
 @section('content')
 <main class="container-fluid text-center">
+
+<!-- Dishes  -->
+<div id="dishes" class="container-fluid text-center bg-grey">
+  <h2 class="text-center">Dishes</h2>
+
+      @include('dishes.dishes_show')
+
+</div>
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
@@ -8,7 +16,7 @@
       <h2>About</h2><br>
       <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-     
+
     </div>
    </div>
 </div>
@@ -23,36 +31,26 @@
       <div class="thumbnail">
         <img src="{{ asset('img/cow.png') }}" alt="Beef" width="400" height="300">
         <p><strong>Beef</strong></p>
-     
+
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
         <img src="{{ asset('img/duck.jpg') }}" alt="Duck" width="400" height="300">
         <p><strong>Duck</strong></p>
-      
+
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
         <img src="{{ asset('img/sheep.png') }}" alt="Sheep" width="400" height="300">
         <p><strong>Sheep</strong></p>
-      
+
       </div>
     </div>
   </div><br>
 
 </div>
-
-
-<!-- Dishes  -->
-<div id="dishes" class="container-fluid text-center bg-grey">
-  <h2 class="text-center">Dishes</h2>
-
-      @include('dishes.dishes_show')
- 
-</div>
-
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">

@@ -46,7 +46,11 @@
                             <label for="date_of_birth" class="col-md-4 control-label">Date of birth</label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', $user->date_of_birth) }}" required autofocus>
+                                <!-- <input id="date_of_birth" type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', $user->date_of_birth) }}" required autofocus> -->
+                                <input id="date_of_birth" type="text" class="form-control"
+                                pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+
+  name="date_of_birth" placeholder="YYYY-MM-DD" value="{{ old('date_of_birth', $user->date_of_birth) }}" required autofocus>
 
                                 @if ($errors->has('date_of_birth'))
                                     <span class="help-block">
@@ -91,19 +95,19 @@
                             <label for="country" class="col-md-4 control-label">Country</label>
 
                             <div class="col-md-6">
-                              
+
 
 
                                 <select id="country" class="form-control" name="country" required autofocus>
                                     @foreach($countries as $country)
-                                    <option 
+                                    <option
                                     @if ($user->country == $country->id)
-                                    selected="selected" 
+                                    selected="selected"
                                     @endif
                                     value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                 </select>
-                               
+
 
                                 @if ($errors->has('country'))
                                     <span class="help-block">
@@ -161,7 +165,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 USE Illuminate\Http\Request;
 USE App\Country;
+use DB;
 
 class Profile extends Controller
 {
@@ -48,9 +49,18 @@ class Profile extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        
+          // public function show($id)
+
+           $users = DB::table('users')
+               ->join('countries', 'users.country', '=', 'countries.id')
+               ->select('users.id','users.name','users.surname', 'users.email', 'users.date_of_birth','users.phone_number',
+               'users.address','users.city','users.zip_code','users.role','countries.name AS c_name')
+               ->get();
+       return view('auth.users', [
+           'users' => $users
+       ]);
     }
 
     /**
@@ -78,6 +88,7 @@ class Profile extends Controller
      */
     public function update(Request $request, $id)
     {
+
       $this->validator($request);
       $updatableUser = User::findOrFail($id);
       $post = $request->except('_token');
@@ -92,9 +103,13 @@ class Profile extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
+        $userToDestroy = User::findOrFail($id);
+        $userToDestroy->delete();
+        return redirect()->route('profile.users');
+
     }
 
   protected function validator(Request $request)
@@ -107,7 +122,7 @@ class Profile extends Controller
             'city' => 'required|string|max:64',
             'country' => 'required|string|max:64',
             'phone_number' => 'required|string|max:20|regex:/^(\+)?\d+$/|unique:users',
-            'zip_code' => 'required|string|max:10',
+            'zip_code' => 'required|numeric|max:999999',
             'email' => 'required|string|email|max:127|unique:users',
             ]);
     }

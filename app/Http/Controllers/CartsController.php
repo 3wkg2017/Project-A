@@ -14,13 +14,13 @@ class CartsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
      public function index()
     {
-       
+
         $user = \Auth::user();
         $currentToken = csrf_token();
-        $carts = Cart::where('token', $currentToken)->get();
+        $carts = Cart::whereNull('order_id')->where('token', $currentToken)->get();
 
 
 
@@ -46,7 +46,7 @@ class CartsController extends Controller
         //     echo 'No dishes selected';
         // }
 
-        
+
 
     }
 
@@ -68,13 +68,14 @@ class CartsController extends Controller
      */
     public function store(Request $request)
     {
+
         $cart = new Cart;
         $cart->token = $request->_token;
         $cart->dish_id = $request->dish_id;
         $cart->save();
         $dish = Dishes::where('id', $request->dish_id)->first();
         $dishes = Dishes::all();
-        $cart->price = $dish->dish_price; 
+        $cart->price = $dish->dish_price;
         //$carts=json_encode($cart);
         return new JsonResponse($cart);
         // return view('welcome', [

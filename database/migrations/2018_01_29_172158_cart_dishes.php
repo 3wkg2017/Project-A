@@ -21,6 +21,8 @@ class CartDishes extends Migration
             $table->timestamps();
         });
     }
+    
+//nenaudojama migracijos lenta palikta tik del pavyzdzio
 
     /**
      * Reverse the migrations.

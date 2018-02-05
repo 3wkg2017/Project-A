@@ -19,6 +19,7 @@ Route::get('/', 'DishesController@index')->name('welcome');
 
 Auth::routes();
 
+
 Route::get('/dishes_create', 'DishesController@create')->name('dishes_create')->middleware('isAdmin');
 //Route::get('/dishes_show', 'DishesController@index')->name('dishes_show');
 Route::post('/dishes_store', 'DishesController@store')->name('dishes_store')->middleware('isAdmin');
@@ -28,9 +29,12 @@ Route::get('/dishes_destroy/{dish_id}', 'DishesController@destroy')->name('dishe
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'Profile@edit')->name('profile.edit');
 Route::post('/profile/{id}', 'Profile@update')->name('profile.update');
+Route::get('/users', 'Profile@show')->name('profile.users')->middleware('isAdmin');
+Route::get('/users/{id}', 'Profile@destroy')->name('profile.destroy')->middleware('isAdmin');
 
 Route::resource('/carts', 'CartsController');
 Route::resource('/orders', 'OrdersController');
+
 
 //Route::get('/', 'DishesController@toHome')->name('welcome');
 // Route::get('admin_area', ['middleware' => 'admin', function () {

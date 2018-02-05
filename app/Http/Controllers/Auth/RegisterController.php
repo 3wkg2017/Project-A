@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Http\Requests; // COULD BE DELETED? 
+use App\Http\Requests; // COULD BE DELETED?
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -29,8 +29,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    //// protected $redirectTo = '/home';
+  //  protected $redirectTo = '/dishes_show';
+    protected $redirectTo = 'welcome';
     /**
      * Create a new controller instance.
      *
@@ -47,18 +48,15 @@ class RegisterController extends Controller
         return view('auth.register', [
             'countries' => $countries
         ]);
-      
+
     }
 
 
 
      public function show()
     {
-       $users = User::all();
-        return view('home', [
-            'users' => $users
-        ]);
-      
+
+
     }
 
 
@@ -78,7 +76,7 @@ class RegisterController extends Controller
             'city' => 'required|string|max:64',
             'country' => 'required|string|max:64',
             'phone_number' => 'required|string|max:20|regex:/^(\+)?\d+$/|unique:users',
-            'zip_code' => 'required|string|max:10',
+            'zip_code' => 'required|numeric|max:999999',
             'email' => 'required|string|email|max:127|unique:users',
             'password' => 'required|string|min:8|confirmed'
         ]);
@@ -106,9 +104,5 @@ class RegisterController extends Controller
             'role' => 'user',
         ]);
     }
-
-
-
-   
 
 }
