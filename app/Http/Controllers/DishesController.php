@@ -26,7 +26,8 @@ class DishesController extends Controller
 
   public function index()
     {
-        $dishes = Dishes::all();
+      
+       $dishes = Dishes::all();
         return view('welcome', [
             'dishes' => $dishes
         ]);
@@ -88,7 +89,11 @@ class DishesController extends Controller
      */
     public function show($id)
     {
-        
+        $dishes = [Dishes::findOrFail($id)];
+
+        return view('welcome', [
+            'dishes' => $dishes
+        ]);
     }
 
     /**

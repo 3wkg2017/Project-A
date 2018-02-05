@@ -17,6 +17,7 @@
 
 Route::get('/', 'DishesController@index')->name('welcome');
 
+
 Auth::routes();
 
 
@@ -34,7 +35,7 @@ Route::get('/users/{id}', 'Profile@destroy')->name('profile.destroy')->middlewar
 
 Route::resource('/carts', 'CartsController');
 Route::resource('/orders', 'OrdersController');
-
+Route::get('/{id}', 'DishesController@show')->name('show');
 
 //Route::get('/', 'DishesController@toHome')->name('welcome');
 // Route::get('admin_area', ['middleware' => 'admin', function () {

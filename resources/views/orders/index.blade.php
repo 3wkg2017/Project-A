@@ -31,22 +31,17 @@
 							<td>
 								{{$loop->iteration}}
 							</td>
+							
 							<td>
-
-							@if(count($carts)>0)
-								<ul>
-								@foreach($carts as $cart)
-									@if($order->id == $cart->order_id)
-										<?php $dish = $cart->dishes;?>
-										<li>
-											<a href="{{ route('welcome') }}">{{$dish->dish_name}}	</a>
-										</li>
-									@endif
-								@endforeach
-								</ul>
-							@endif
-
+									
+									@foreach($order->carts as $cart)
+									<p>
+										<a href="{{ route('show', $cart->dishes->id) }}">{{ $cart->dishes->dish_name }}</a>
+									</p>
+									@endforeach
+		
 							</td>
+							
 							<td>
 								{{$user->name}}
 							</td>

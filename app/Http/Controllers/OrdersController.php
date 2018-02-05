@@ -18,24 +18,14 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        // $orders = Order::table('orders')
-        //    ->join('carts', 'orders.id', '=', 'carts.order_id')
-        //    ->join('carts', 'dish_id', '=', 'dishes.id')
-        //    ->join('users', 'user_id', '=', 'users.id')
-        //    ->select('orders.id','orders.total_amount','orders.tax_amount', 'orders.created_at', 'dishes.dish_name','users.name','users.address')
-        //    ->get();
-        // $users->
-        // $orders->Order:all();
-        // $carts->$user->posts()->where('active', 1)->get();
-        // $dishes->
-        $user = Auth::user();
-        $orders = Order::where('user_id', $user->id)->get();
-        $carts = Cart::all();
-        return view('orders.index', [
-           'orders' => $orders,
-           'carts' => $carts,
-           'user' => $user
-        ]);
+      $user = Auth::user();
+      $orders = Order::where('user_id', $user->id)->get();
+      //$carts = Cart::where('order_id', $orders)->get();
+      return view('orders.index', [
+             'orders' => $orders,
+             'user' => $user
+        //     'carts' => $carts
+          ]);
     }
 
     /**
@@ -79,31 +69,13 @@ class OrdersController extends Controller
         ];
 
         $order = Order::create($orderToSave);
-
         $order_id = $order->id;
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->update(['order_id' =>  $order_id]);
+        
+       
+      return redirect()->route('orders.index');
 
-        //$carts = Cart::where('order_id', $order_id)->get();
-
-
-        // user->order | order->cart | dish->cart
-
-        $orders = Order::where('user_id', $user->id)->get();
-        // $carts = Cart::where('order_id', $order_id)->get();
-        $carts = Cart::all();
-        // $orderM = new Order();
-        // $carts = $orderM->carts();
-        // $cartsM = new Cart();
-        // $dishes = $cartsM->dishes();
-
-
-          return view('orders.index', [
-             'orders' => $orders,
-             'carts' => $carts,
-             'user' => $user
-          ]);
-
-      //  //return redirect()->route('orders.index');
+      
     }
 
     /**
@@ -150,4 +122,15 @@ class OrdersController extends Controller
     {
         //
     }
+
+    public function getDish($order){
+        $carts = Cart::where('order_id', $order)->get(); // many Carts
+        $dishName = [];
+        foreach($carts as $cart){
+            $dishName = $cart->dishes->dish_name;    
+            array_push($dishContainer, $dishName); 
+        }
+        return $dishContainer;
+    }
+
 }
