@@ -31,7 +31,7 @@
 		        <li><a href="#contact">CONTACT</a></li>
 		        <li><a href="{{ route('login') }}">LOGIN</a></li>
 		        <li><a href="{{ route('register') }}">REGISTER</a></li>
-		        <li><a  id="cart" href="{{ route('carts.index') }}">Cart (<span  class="cart-size">0</span>)-<span class="cart-total">0</span>$</a></li>
+		        <li><a  id="cart" href="{{ route('carts.index') }}">Cart (<span  class="cart-size">{{ $carts_size }}</span>)-<span class="cart-total">{{ $carts_total }}</span>$</a></li>
 		       </ul>
 
 

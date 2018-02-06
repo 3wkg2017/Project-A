@@ -1,4 +1,3 @@
-
 <div id="dishes" class="container-fluid text-center">
   <div class="row">
 			@foreach($dishes as $dish)

@@ -41,16 +41,12 @@ class DishesController extends Controller
 
     protected function validator(Request $data) 
     {
-       
         return Validator::make($data->all(), [
             'dish_name' => 'required|string|max:127',
             'dish_price' => 'required|numeric|max:10',
             'dish_description' => 'required|string|max:255', 
             'dish_picture' => 'required|string|max:127',
         ]);
-
-
-
     }
 
     /**
@@ -95,6 +91,16 @@ class DishesController extends Controller
             'dishes' => $dishes
         ]);
     }
+
+    public function showOneDish($id)
+    {
+        $dish = [Dishes::findOrFail($id)];
+        return view('dishes.showOneDish', [
+            'dish' => $dish
+        ]);
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.

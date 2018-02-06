@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Cart;
 use App\Dishes;
+use App\Helpers\CartCalculator;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class CartsController extends Controller
 {
+    protected $CartCalculator;
+
+    public function __construct(CartCalculator $CartCalculator){
+         $this->CartCalculator = $CartCalculator;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,34 +24,10 @@ class CartsController extends Controller
 
      public function index()
     {
-
-        $user = \Auth::user();
-        $currentToken = csrf_token();
-        $carts = Cart::whereNull('order_id')->where('token', $currentToken)->get();
-
-
-
-        //$carts = Cart::find($currentToken);
-        //$carts->dishes()->where('id', $carts->dish_id)->get();
-        // dd($carts);
-        //$user = App\User::find(1);
-        //$user->posts()->where('active', 1)->get();
-
-        // if(isset($carts)){
-        //     foreach ($carts as  $cart) {
-        //         $dishes = Dishes::where('id', $cart->dish_id)->get();
-        //     }
-
-             return view('carts.index', [
-            // 'dishes' => $dishes,
-             'carts' => $carts
-             ]);
-
-
-
-        // } else {
-        //     echo 'No dishes selected';
-        // }
+       $carts = $this->CartCalculator->getCarts();
+       $carts_total = $this->CartCalculator->getTotalPrice();
+       $carts_size = $this->CartCalculator->getSize();
+       return view('carts.index');
 
 
 

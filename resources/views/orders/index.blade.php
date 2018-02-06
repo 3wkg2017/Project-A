@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 @section('content')
 <div id="orders" class="container-fluid text-center">
 
@@ -36,7 +36,7 @@
 									
 									@foreach($order->carts as $cart)
 									<p>
-										<a href="{{ route('show', $cart->dishes->id) }}">{{ $cart->dishes->dish_name }}</a>
+										<a href="{{ route('showOneDish', $cart->dishes->id) }}">{{ $cart->dishes->dish_name }}</a>
 									</p>
 									@endforeach
 		
