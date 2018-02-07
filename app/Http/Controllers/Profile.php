@@ -93,7 +93,7 @@ class Profile extends Controller
       $updatableUser = User::findOrFail($id);
       $post = $request->except('_token');
       $updatableUser->update($post);
-      return redirect()->route('home');
+      return redirect()->route('welcome');
 
     }
 

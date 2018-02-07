@@ -22,8 +22,6 @@ Auth::routes();
 
 
 Route::get('/', 'DishesController@index')->name('welcome');
-
-
 Route::get('/dishes_create', 'DishesController@create')->name('dishes_create')->middleware('isAdmin');
 Route::post('/dishes_store', 'DishesController@store')->name('dishes_store')->middleware('isAdmin');
 Route::get('/dishes_edit/{dish_id}', 'DishesController@edit')->name('dishes_edit')->middleware('isAdmin');
@@ -37,6 +35,7 @@ Route::get('/users/{id}', 'Profile@destroy')->name('profile.destroy')->middlewar
 Route::resource('/carts', 'CartsController');
 Route::resource('/orders', 'OrdersController');
 Route::resource('/reservations', 'ReservationsController');
+//Route::get('/', 'DishesController@index')->name('showAll');
 Route::get('/{id}', 'DishesController@show')->name('show');
 Route::get('/{id}', 'DishesController@showOneDish')->name('showOneDish');
 
