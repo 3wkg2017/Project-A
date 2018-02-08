@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\Reservation;
@@ -12,14 +15,14 @@ use Illuminate\Http\Request;
 
 class ReservationsController extends Controller
 {
-   
 
-protected function validator(Request $request) 
+
+protected function validator(Request $request)
     {
         return Validator::make($request->all(), [
             'name' => 'required|string|max:32',
             'persons' => 'required|numeric|max:3',
-            'date' => 'required', 
+            'date' => 'required',
             'time' => 'required',
             'phone' => 'required|string|max:16',
         ]);
@@ -32,8 +35,16 @@ protected function validator(Request $request)
      */
     public function index()
     {
-
+      $reservations = Reservation::all();
+      $user = Auth::user();
+       return view('reservations.index', [
+           'reservations' => $reservations,
+           'user' => $user
+       ]);
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +53,13 @@ protected function validator(Request $request)
      */
     public function create()
     {
-        return view('reservations.create');
+        $user = \Auth::user();
+        $today = today();
+        $today->toDateString();
+        return view('reservations.create', [
+        'user' => $user, 
+        'today' => $today
+        ]);
     }
 
     /**
@@ -56,7 +73,7 @@ protected function validator(Request $request)
         $this->validator($request);
         $post = $request->except('_token');
         Reservation::create($post);
-        //return redirect()->route('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -67,7 +84,7 @@ protected function validator(Request $request)
      */
     public function show($id)
     {
-     
+
     }
 
     /**
@@ -78,7 +95,12 @@ protected function validator(Request $request)
      */
     public function edit($id)
     {
-        //
+      $reservation = Reservation::findOrFail($id);
+
+      return view('reservations.edit', [
+      'reservation' => $reservation
+      ]);
+
     }
 
     /**
@@ -88,9 +110,13 @@ protected function validator(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $reservationToSave = Reservation::findOrFail($request);
+        $this->validator($request);
+        $post = $request->except('_token');
+        $reservationToSave->update($post);
+        return redirect()->route('reservations.index');
     }
 
     /**
@@ -102,5 +128,8 @@ protected function validator(Request $request)
     public function destroy($id)
     {
         //
+        $reservationToDestroy = Reservation::findOrFail($id);
+        $reservationToDestroy->delete();
+        return redirect()->route('reservations.index');
     }
 }

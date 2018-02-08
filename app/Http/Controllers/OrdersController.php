@@ -18,15 +18,25 @@ class OrdersController extends Controller
      */
     public function index()
     {
-      $user = Auth::user();
-      $orders = Order::where('user_id', $user->id)->get();
-      //$carts = Cart::where('order_id', $orders)->get();
-      return view('orders.index', [
-             'orders' => $orders,
-             'user' => $user
-        //     'carts' => $carts
-          ]);
+
+      if(Auth::user() == 'user'){   // user
+          $user = Auth::user();
+          $orders = Order::where('user_id', $user->id)->get();
+          return view('orders.index', [
+                 'orders' => $orders,
+                 'user' => $user
+              ]);
+      }  
+      else {                        // admin
+          $orders = Order::all();
+          return view('orders.index', [
+                 'orders' => $orders,
+              ]);
+      }
+      
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -120,7 +130,10 @@ class OrdersController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        //dd($order);
+        $order->delete();
+        //return view('orders.index');
+        return redirect()->route('orders.index');
     }
 
     public function getDish($order){

@@ -11,55 +11,81 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
-			   <li><a href="{{ route('welcome') }}#about">ABOUT</a></li>
-			   <li><a href="{{ route('welcome') }}#portfolio">MEAT</a></li>
-			   <li><a href="{{ route('welcome') }}#contact">CONTACT</a></li>
+			@if(Auth::check())
+                @if(Auth::user()->role != 'admin')
+                   <li><a href="{{ route('welcome') }}#about">ABOUT</a></li>
+    			   <li><a href="{{ route('welcome') }}#portfolio">MEAT</a></li>
+    			   <li><a href="{{ route('welcome') }}#contact">CONTACT</a></li>
+                @endif
+            @endif
+
+
 			@guest
-				<li><a href="{{ route('login') }}">LOGIN</a></li>
+			    <li><a href="{{ route('welcome') }}#about">ABOUT</a></li>
+                <li><a href="{{ route('welcome') }}#portfolio">MEAT</a></li>
+                <li><a href="{{ route('welcome') }}#contact">CONTACT</a></li>
+                <li><a href="{{ route('login') }}">LOGIN</a></li>
 				<li><a href="{{ route('register') }}">REGISTER</a></li>
 			@endguest
     		
+
+            @if(Auth::check())
+                @if(Auth::user()->role != 'admin')
+                   <li>
+                        <a href="{{ route('reservations.create') }}">Reservations</a>
+                    </li>
+                @endif
+            @endif
+
     		@if(Auth::check())
-                <li>
-                  <a href="{{route('profile.edit')}}">Edit Profile</a>
-                </li>
-                <li>
-                  <a href="{{route('orders.index')}}">My Orders</a>
-                </li>
-            @if(Auth::user()->role == 'admin')
-                <li>
-                    <a href="{{ route('dishes_create') }}">Cook Dish</a>
-                </li>
-                
-                <li>
-                    <a href="{{ route('profile.users') }}">Users</a>
-                </li>
-                 
-                <li>
-                    <a href="{{route('orders.index')}}">All Orders</a>
-                </li>
-         
-         		<li>
-                    <a href="#">Reservations</a>
-                </li>
-           @endif
-                  <li class="dropdown">
-                  	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                    	{{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-		            <ul class="dropdown-menu">
-                    	<li>
-                        	<a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            	{{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                  </li>
+                    
+                @if(Auth::user()->role != 'admin')
+                    <li>
+                      <a href="{{route('orders.index')}}">My Orders</a>
+                    </li>
+                @endif
+                    
+                @if(Auth::user()->role == 'admin')
+                    <li>
+                        <a href="{{ route('dishes_create') }}">Cook Dish</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{ route('profile.users') }}">Users</a>
+                    </li>
+                     
+                    <li>
+                       <a href="{{ route('orders.index') }}">Orders</a> 
+                    </li>
+                    <li>
+                        <a href="{{route('reservations.index')}}">Reservations</a> 
+                    </li>
+
+
+             		
+               @endif
+
+                    <li>
+                      <a href="{{route('profile.edit')}}">Profile</a>
+                    </li>
+
+                      <li class="dropdown">
+                      	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                        	{{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+    		            <ul class="dropdown-menu">
+                        	<li>
+                            	<a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                	{{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                      </li>
             @endif
             <li>
 				<a id="cart" href="{{ route('carts.index') }}">

@@ -39,3 +39,6 @@ Route::resource('/reservations', 'ReservationsController');
 Route::get('/{id}', 'DishesController@show')->name('show');
 Route::get('/{id}', 'DishesController@showOneDish')->name('showOneDish');
 
+
+//Route::get('/', 'DishesController@index')->name('showAll');
+

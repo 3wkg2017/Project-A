@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('content')
-<div id="orders" class="container-fluid text-center">
+
+<div id="reservations" class="container-fluid text-center">
 
 				<table class="table table-striped table-dark table-bordered table-responsive">
 					<thead class="blue-grey lighten-4">
 					<tr>
 						<th class="thead-dark">#</th>
-						<th class="thead-dark">Orders</th>
-						<th class="thead-dark">Customer</th>
-						<th class="thead-dark">Address</th>
-						<th class="thead-dark">Total Amount</th>
-						<th class="thead-dark">Tax Amount</th>
+						<th class="thead-dark">Name</th>
+						<th class="thead-dark">Number of persons</th>
 						<th class="thead-dark">Date</th>
+						<th class="thead-dark">Time</th>
+						<th class="thead-dark">Phone</th>
 
 						@if(Auth::check() && Auth::user()->role == 'admin')
 							<th>
@@ -25,67 +25,42 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($orders as $order)
-
+					@foreach($reservations as $reservation)
 						<tr>
 							<td>
 								{{$loop->iteration}}
 							</td>
-							
 							<td>
-									
-									@foreach($order->carts as $cart)
-									<p>
-										<a href="{{ route('showOneDish', $cart->dishes->id) }}">{{ $cart->dishes->dish_name }}</a>
-									</p>
-									@endforeach
-		
+								{{$reservation->name}}
 							</td>
-							
-
-							@if(Auth::check() && Auth::user()->role == 'admin')
-								<td>
-								{{ $order->user->name }}
-								</td>
-								<td>
-								{{ $order->user->address }}
-								</td>
-							@else
-								<td>
-								{{$user->name}}
-								</td>
-								<td>
-								{{$user->address}}
-								</td>
-							@endif
-							
-
-							
-							<td>
-								{{$order->total_amount}}
+              <td>
+								{{$reservation->persons}}
 							</td>
 							<td>
-								{{$order->tax_amount}}
+								{{$reservation->date}}
 							</td>
 							<td>
-								{{$order->created_at}}
+								{{$reservation->time}}
+							</td>
+							<td>
+								{{$reservation->phone}}
 							</td>
 
 
 						@if(Auth::check() && Auth::user()->role == 'admin')
-							<td>
-								<a href="{{ route('orders.edit', $order->id) }}">
+							
+             				<td>
+								<a href="{{ route('reservations.edit', $reservation) }}">
 									<button class="btn btn-success">Edit</button>
 								</a>
 							</td>
 
 							<td>
-							<form class="order_form" action="{{ route('orders.destroy', $order) }}" method="post" >
+							<form class="order_form" action="{{ route('reservations.destroy', $reservation) }}" method="post" >
 									{{ method_field('DELETE') }}
 				    				{{ csrf_field() }}
 				    			<button class="btn btn-danger">Delete</button>
 							</form>
-							
 							</td>
 
 						@endif
@@ -93,7 +68,7 @@
 
 					@endforeach
 				</tbody>
-					</table>
+				</table>
 					<div class="">
 						<a href="{{ route('welcome') }}">
 							<button class="btn btn-default">To Dishes</button>

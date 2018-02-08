@@ -1,10 +1,16 @@
 
 1. Remove Login and Register if authentificated - DONE
+
 2. Set routes to all <a href>'s - DONE
+
 3. Fix layout vs app.layout - home/welcome issue on dished variable, probably session was deleted => neeed to recover
+
 4. Fix HomePage after Login to normal way over menu - DONE
+
 5. Set Cart limit to 100
+
 6. Ajust colors and styles
+
 7. User could remove his order?
 yes?
 
