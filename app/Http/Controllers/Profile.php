@@ -53,11 +53,14 @@ class Profile extends Controller
     {
           // public function show($id)
 
-           $users = DB::table('users')
-               ->join('countries', 'users.country', '=', 'countries.id')
-               ->select('users.id','users.name','users.surname', 'users.email', 'users.date_of_birth','users.phone_number',
-               'users.address','users.city','users.zip_code','users.role','countries.name AS c_name')
-               ->get();
+           // $users = DB::table('users')
+           //     ->join('countries', 'users.country', '=', 'countries.id')
+           //     ->select('users.id','users.name','users.surname', 'users.email', 'users.date_of_birth','users.phone_number',
+           //     'users.address','users.city','users.zip_code','users.role','countries.name AS c_name')
+           //     ->get();
+
+        $users = User::paginate(5);
+
        return view('auth.users', [
            'users' => $users
        ]);

@@ -39,6 +39,10 @@
 
 			@endforeach
 
+			
+            {{ $dishes->render() }}
+
+
 	</div>
 </main>
 <script type="text/javascript">

@@ -26,6 +26,8 @@
 							</div>
 						</div>
 					@endforeach
+
+					 
 	</div>
 						<div class="row">
 						@if(Auth::check())
@@ -63,5 +65,9 @@
 						@endif
 					  	<br>
 						</div>
+
+
+         
+
 </main>
 @endsection

@@ -59,6 +59,8 @@
 					@endforeach
 				</tbody>
 				</table>
+
+				{{ $users->render() }}
 					<div class="">
 						<a href="{{ route('welcome') }}">
 							<button class="btn btn-default">To Dishes</button>

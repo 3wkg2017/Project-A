@@ -15,6 +15,7 @@
 <body>
     <div id="app">
         @include('layouts.menu')
+        <br>
         @yield('content')
     </div>
     <!-- Scripts -->

@@ -7,7 +7,9 @@
 				<span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			 </button>
-			 <a class="navbar-brand" href="{{ route('welcome') }}">RMC</a>
+			 <a class="navbar-brand" href="{{ route('welcome') }}">
+                <img src="{{ asset('img/redmeat.png') }}" alt="RMC" width="93" height="53">         
+             </a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">

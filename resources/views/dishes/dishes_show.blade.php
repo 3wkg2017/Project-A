@@ -30,7 +30,12 @@
 			</div>
 			</div>
 			@endforeach
+
 	</div>
+
+    
+            {{ $dishes->render() }}
+
 </div>
 
 @section('js')

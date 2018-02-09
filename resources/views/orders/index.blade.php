@@ -93,12 +93,12 @@
 
 					@endforeach
 				</tbody>
-					</table>
+			</table>
+					{{ $orders->render() }}
 					<div class="">
 						<a href="{{ route('welcome') }}">
 							<button class="btn btn-default">To Dishes</button>
 						</a>
 					</div>
-
 </div>
 @endsection

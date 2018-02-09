@@ -27,7 +27,7 @@ class DishesController extends Controller
   public function index()
     {
       
-       $dishes = Dishes::all();
+       $dishes = Dishes::paginate(5);
         return view('welcome', [
             'dishes' => $dishes
         ]);

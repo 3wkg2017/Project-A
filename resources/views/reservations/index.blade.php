@@ -4,7 +4,7 @@
 <div id="reservations" class="container-fluid text-center">
 
 				<table class="table table-striped table-dark table-bordered table-responsive">
-					<thead class="blue-grey lighten-4">
+					<thead class="thead-dark">
 					<tr>
 						<th class="thead-dark">#</th>
 						<th class="thead-dark">Name</th>
@@ -69,6 +69,7 @@
 					@endforeach
 				</tbody>
 				</table>
+				{{ $reservations->render() }}
 					<div class="">
 						<a href="{{ route('welcome') }}">
 							<button class="btn btn-default">To Dishes</button>

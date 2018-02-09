@@ -18,6 +18,7 @@
 			  <p>We serve red meat only for real mens!</p>
 			</div>
 		</header>
+		<br>
 	    	@yield('content')
 	    <footer class="container-fluid text-center">
 	  <a href="#myPage" title="To Top">

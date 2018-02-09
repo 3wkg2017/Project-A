@@ -17,6 +17,7 @@ class CartsController extends Controller
     }
 
     /**
+
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -28,10 +29,7 @@ class CartsController extends Controller
        $carts_total = $this->CartCalculator->getTotalPrice();
        $carts_size = $this->CartCalculator->getSize();
        return view('carts.index');
-
-
-
-    }
+ }
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +55,7 @@ class CartsController extends Controller
         $cart->dish_id = $request->dish_id;
         $cart->save();
         $dish = Dishes::where('id', $request->dish_id)->first();
-        $dishes = Dishes::all();
+        $dishes = Dishes::all;
         $cart->price = $dish->dish_price;
         //$carts=json_encode($cart);
         return new JsonResponse($cart);

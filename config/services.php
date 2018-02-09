@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+	'mailgun' => [
+	    'domain' => 'your-mailgun-domain',
+	    'secret' => 'your-mailgun-key',
+	],
 
 ];

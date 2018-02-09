@@ -28,7 +28,7 @@ class OrdersController extends Controller
               ]);
       }  
       else {                        // admin
-          $orders = Order::all();
+          $orders = Order::paginate(5);
           return view('orders.index', [
                  'orders' => $orders,
               ]);

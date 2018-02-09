@@ -35,7 +35,7 @@ protected function validator(Request $request)
      */
     public function index()
     {
-      $reservations = Reservation::all();
+      $reservations = Reservation::paginate(5);
       $user = Auth::user();
        return view('reservations.index', [
            'reservations' => $reservations,
@@ -54,8 +54,11 @@ protected function validator(Request $request)
     public function create()
     {
         $user = \Auth::user();
-        $today = today();
+        $today = now();
         $today->toDateString();
+
+
+
         return view('reservations.create', [
         'user' => $user, 
         'today' => $today
@@ -96,7 +99,6 @@ protected function validator(Request $request)
     public function edit($id)
     {
       $reservation = Reservation::findOrFail($id);
-
       return view('reservations.edit', [
       'reservation' => $reservation
       ]);
@@ -112,11 +114,16 @@ protected function validator(Request $request)
      */
     public function update(Request $request)
     {
-        $reservationToSave = Reservation::findOrFail($request);
+        $reservationToSave = Reservation::findOrFail($request->id);
         $this->validator($request);
         $post = $request->except('_token');
         $reservationToSave->update($post);
-        return redirect()->route('reservations.index');
+       
+
+
+       
+        return view('reservations.index');
+
     }
 
     /**

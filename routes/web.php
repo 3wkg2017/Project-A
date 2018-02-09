@@ -40,5 +40,12 @@ Route::get('/{id}', 'DishesController@show')->name('show');
 Route::get('/{id}', 'DishesController@showOneDish')->name('showOneDish');
 
 
-//Route::get('/', 'DishesController@index')->name('showAll');
+Route::post('/reservations/{reservation}', 'ReservationsController@update')->name('reservations.update')->middleware('isAdmin');
+Route::post('/reservations/{reservation}', 'ReservationsController@edit')->name('reservations.edit')->middleware('isAdmin');
+Route::post('/reservations/{reservation}', 'ReservationsController@destroy')->name('reservations.destroy')->middleware('isAdmin');
+
+Route::post('/orders/{reservation}', 'OrdersController@update')->name('orders.update')->middleware('isAdmin');
+Route::post('/orders/{reservation}', 'OrdersController@edit')->name('orders.edit')->middleware('isAdmin');
+Route::post('/orders/{reservation}', 'OrdersController@destroy')->name('orders.destroy')->middleware('isAdmin');
+
 

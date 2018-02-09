@@ -4,12 +4,10 @@
 <main class="container-fluid text-center">
 
 <!-- Dishes  -->
-<a href="{{ route('welcome') }}">
 <div id="dishes" class="container-fluid text-center bg-grey">
   <h2 class="text-center">Dishes</h2>
       @include('dishes.dishes_show')
 </div>
-</a>
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
