@@ -44,7 +44,7 @@ Route::post('/reservations/{reservation}', 'ReservationsController@update')->nam
 Route::post('/reservations/{reservation}', 'ReservationsController@edit')->name('reservations.edit')->middleware('isAdmin');
 Route::post('/reservations/{reservation}', 'ReservationsController@destroy')->name('reservations.destroy')->middleware('isAdmin');
 
-Route::post('/orders/{reservation}', 'OrdersController@update')->name('orders.update')->middleware('isAdmin');
+Route::put('/orders/{reservation}', 'OrdersController@update')->name('orders.update')->middleware('isAdmin');
 Route::post('/orders/{reservation}', 'OrdersController@edit')->name('orders.edit')->middleware('isAdmin');
 Route::post('/orders/{reservation}', 'OrdersController@destroy')->name('orders.destroy')->middleware('isAdmin');
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use App\Helpers\CartCalculator;
+
 class LoginController extends Controller
 {
     /*
@@ -28,7 +30,30 @@ class LoginController extends Controller
      */
     // protected $redirectTo = '/home';
 
-     protected $redirectTo = '/carts';
+
+
+
+    // protected $redirectTo = '/orders';
+
+
+    protected function redirectTo()
+    {
+
+      $cart = new CartCalculator();
+      $cart = $cart->getCarts();
+     
+      dd($carts);
+      dd(count($carts));
+      
+
+      if(!empty($carts)) {
+        return '/carts';
+      } else {
+        return '/orders';
+      }
+    }
+
+
 
     /**
      * Create a new controller instance.
@@ -39,6 +64,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+
+
+
+
 
     // protected function authenticated(Request $request, $user)
     // {

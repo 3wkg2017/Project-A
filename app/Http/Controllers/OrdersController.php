@@ -19,20 +19,23 @@ class OrdersController extends Controller
     public function index()
     {
 
-      if(Auth::user() == 'user'){   // user
-          $user = Auth::user();
-          $orders = Order::where('user_id', $user->id)->get();
-          return view('orders.index', [
-                 'orders' => $orders,
-                 'user' => $user
-              ]);
-      }  
-      else {                        // admin
-          $orders = Order::paginate(5);
-          return view('orders.index', [
-                 'orders' => $orders,
-              ]);
-      }
+        if(Auth::check()){
+          if(Auth::user()->role == 'user'){   // user
+              $user = Auth::user();
+              $orders = Order::where('user_id', $user->id)->paginate(5);
+              return view('orders.index', [
+                     'orders' => $orders,
+                     'user' => $user
+                  ]);
+          }  
+          else {                        // admin
+              $orders = Order::paginate(5);
+              return view('orders.index', [
+                     'orders' => $orders,
+                  ]);
+          }
+        }
+
       
     }
 

@@ -1,10 +1,8 @@
-
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
 @import "variables";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "fonts/font1";
-@import "fonts/font2";
-@import "page_style";
-
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";

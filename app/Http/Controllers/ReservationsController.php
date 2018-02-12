@@ -35,12 +35,14 @@ protected function validator(Request $request)
      */
     public function index()
     {
-      $reservations = Reservation::paginate(5);
-      $user = Auth::user();
-       return view('reservations.index', [
-           'reservations' => $reservations,
-           'user' => $user
-       ]);
+        if(Auth::check()){
+          $reservations = Reservation::paginate(5);
+          $user = Auth::user();
+           return view('reservations.index', [
+               'reservations' => $reservations,
+               'user' => $user
+           ]);
+        }
     }
 
 
@@ -112,17 +114,14 @@ protected function validator(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $reservation)
     {
-        $reservationToSave = Reservation::findOrFail($request->id);
+        //dd($reservation);
+        $reservationToSave = Reservation::findOrFail($reservation);
         $this->validator($request);
         $post = $request->except('_token');
         $reservationToSave->update($post);
-       
-
-
-       
-        return view('reservations.index');
+        return redirect()->route('reservations.index');
 
     }
 

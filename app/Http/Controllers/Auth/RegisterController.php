@@ -31,7 +31,7 @@ class RegisterController extends Controller
      */
     //// protected $redirectTo = '/home';
   //  protected $redirectTo = '/dishes_show';
-    protected $redirectTo = 'welcome';
+    protected $redirectTo = '/';
     /**
      * Create a new controller instance.
      *

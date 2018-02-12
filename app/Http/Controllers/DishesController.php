@@ -167,7 +167,7 @@ class DishesController extends Controller
         if($direction == 'd'){
             $path[0] = '';
         } else {
-           $path[0] = 'storage';  
+           $path[0] = '/storage';  
         }
         $path = implode('/', $path);
         return $path;       

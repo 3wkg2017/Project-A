@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+
+
+@if(Auth::check()) 
+
 <div id="orders" class="container-fluid text-center">
 
 				<table class="table table-striped table-dark table-bordered table-responsive">
@@ -41,6 +45,14 @@
 									@endforeach
 		
 							</td>
+
+<!-- 
+								<td>
+								{{ $order->user->name }}
+								</td>
+								<td>
+								{{ $order->user->address }}
+								</td> -->
 							
 
 							@if(Auth::check() && Auth::user()->role == 'admin')
@@ -52,10 +64,10 @@
 								</td>
 							@else
 								<td>
-								{{$user->name}}
+								{{ $user->name }}
 								</td>
 								<td>
-								{{$user->address}}
+								{{ $user->address }}
 								</td>
 							@endif
 							
@@ -101,4 +113,5 @@
 						</a>
 					</div>
 </div>
+@endif
 @endsection
