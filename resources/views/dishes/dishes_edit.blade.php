@@ -1,6 +1,6 @@
-@section('content')
-@extends('layouts.app')
 
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -45,9 +45,11 @@
                             <label for="dish_description" class="col-md-4 control-label">Dish Description</label>
 
                          <div class="col-md-6">
-                                <textarea id="dish_description" type="text" class="form-control" name="dish_description" required>
+                           
+                                <textarea id="dish_description"  type="text" class="form-control" name="dish_description" required>
                               {{ old('dish_description', $dish->dish_description) }}
                             	</textarea>
+                                   
 
                                 @if ($errors->has('dish_description'))
                                     <span class="help-block">
@@ -87,4 +89,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+  <script>
+    console.log('test');
+    CKEDITOR.replace( 'dish_description' );
+  </script>
 @endsection

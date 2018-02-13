@@ -36,7 +36,7 @@ protected function validator(Request $request)
     public function index()
     {
         if(Auth::check()){
-          $reservations = Reservation::paginate(5);
+          $reservations = Reservation::paginate(15);
           $user = Auth::user();
            return view('reservations.index', [
                'reservations' => $reservations,

@@ -22,14 +22,14 @@ class OrdersController extends Controller
         if(Auth::check()){
           if(Auth::user()->role == 'user'){   // user
               $user = Auth::user();
-              $orders = Order::where('user_id', $user->id)->paginate(5);
+              $orders = Order::where('user_id', $user->id)->paginate(15);
               return view('orders.index', [
                      'orders' => $orders,
                      'user' => $user
                   ]);
           }  
           else {                        // admin
-              $orders = Order::paginate(5);
+              $orders = Order::paginate(15);
               return view('orders.index', [
                      'orders' => $orders,
                   ]);

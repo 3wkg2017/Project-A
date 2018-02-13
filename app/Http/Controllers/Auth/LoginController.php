@@ -33,7 +33,7 @@ class LoginController extends Controller
 
 
 
-    // protected $redirectTo = '/orders';
+   // protected $redirectTo = '/carts';
 
 
     protected function redirectTo()
@@ -42,11 +42,10 @@ class LoginController extends Controller
       $cart = new CartCalculator();
       $cart = $cart->getCarts();
      
-      dd($carts);
-      dd(count($carts));
+      //dd($cart);
+      //dd(count($cart));
       
-
-      if(!empty($carts)) {
+      if(count($cart)>0) {
         return '/carts';
       } else {
         return '/orders';
