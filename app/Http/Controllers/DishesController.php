@@ -33,14 +33,21 @@ class DishesController extends Controller
         ]);
     }
 
-    public function reorder()
-      {
-        $dishes = Dishes::orderBy('dish_price', 'desc')->paginate(6);
-         // $dishes = Dishes::paginate(6);
-          return view('welcome', [
-              'dishes' => $dishes
+    public function reorder($sort_type)
+    {
+        if($sort_type = 0){
+            $dishes = Dishes::orderBy('dish_price', 'desc')->paginate(6);
+            return view('welcome', [
+            'dishes' => $dishes
           ]);
-      }
+        }
+        else {
+            $dishes = Dishes::orderBy('dish_price', 'asc')->paginate(6);
+            return view('welcome', [
+            'dishes' => $dishes
+          ]);
+        }
+    }
 
     public function dishesByCart($id)
     {

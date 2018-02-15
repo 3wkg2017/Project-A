@@ -8,6 +8,7 @@ use App\Dishes;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use WebToPay;
 
 class OrdersController extends Controller
 {
@@ -19,19 +20,24 @@ class OrdersController extends Controller
     public function index()
     {
         if(Auth::check()){
+
           if(Auth::user()->role == 'user'){   // user
               $user = Auth::user();
               $orders = Order::where('user_id', $user->id)->paginate(15);
+            
               return view('orders.index', [
                      'orders' => $orders,
-                     'user' => $user
+                     'user' => $user,
+                     
                   ]);
           }
           else {                        // admin
+              $allOrders = Order::all();
+              $allOrders = count($allOrders);
               $orders = Order::paginate(15);
-               // dd($orders[0]->user->name);
               return view('orders.index', [
                      'orders' => $orders,
+                      'allOrders' => $allOrders
                   ]);
           }
         }
@@ -83,7 +89,35 @@ class OrdersController extends Controller
         $order = Order::create($orderToSave);
         $order_id = $order->id;
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->update(['order_id' =>  $order_id]);
-      return redirect()->route('orders.index');
+
+
+       // dd(url('accept'));
+
+        try {
+               // $self_url = get_self_url();
+             
+                $request = WebToPay::redirectToPayment(array(
+                    'projectid'     => 111924,
+                    'sign_password' => 'cb8acb1dc9821bf74e6ca9068032d623',
+                    'orderid'       => 0,
+                    'amount'        => 1000,
+                    'currency'      => 'EUR',
+                    'country'       => 'LT',
+                    'accepturl'     => url('accept'),
+                    'cancelurl'     => url('cancel'),
+                    'callbackurl'   => url('callback'),
+                    'test'          => 1,
+                ));
+            } catch (WebToPayException $e) {
+                // handle exception
+            } 
+
+
+     // return redirect()->route('orders.index');
+   
+           
+
+      
     }
 
     /**
@@ -94,7 +128,23 @@ class OrdersController extends Controller
      */
     public function show(Order $order)
     {
-        //
+       
+    }
+
+
+    public function accept()
+    {
+         return view('payments.accept');
+    }
+
+    public function cancel()
+    {
+         return view('payments.cancel');
+    }
+
+    public function callback()
+    {
+         return view('payments.callback');;
     }
 
     /**
@@ -145,3 +195,4 @@ class OrdersController extends Controller
     }
 
 }
+

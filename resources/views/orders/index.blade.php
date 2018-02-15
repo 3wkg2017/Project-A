@@ -3,7 +3,9 @@
 
 @if(Auth::check())
 <div id="orders" class="container-fluid text-center">
-				<p>Orders</p>
+		@if(Auth::user()->role == 'admin')
+				<p class="pull-right">Orders: <span>{{ $allOrders }}</span></p>
+		@endif
 				<table class="table table-striped table-dark table-bordered table-responsive">
 					<thead class="blue-grey lighten-4">
 					<tr>

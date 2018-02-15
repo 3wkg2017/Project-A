@@ -1,7 +1,11 @@
 <div class="">
-	<a href="{{ route('dishes_reorder') }}">
-		<i class="fa fa-reorder fa-2x" aria-hidden="true"></i>
-	</a>
+	<a class="pull-right" href="{{ route('dishes_reorder', 1) }}">
+		<i class="fa fa-sort-amount-desc fa-2x" aria-hidden="true"></i>
+    </a>
+    
+    <a class="pull-right" href="{{ route('dishes_reorder', 0) }}">
+        <i class="fa fa-sort-amount-asc fa-2x" aria-hidden="true"></i>
+    </a>
 </div>
 
 <div id="dishes" class="container-fluid text-center">
