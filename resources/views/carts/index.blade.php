@@ -27,7 +27,7 @@
 						</div>
 					@endforeach
 
-					 
+
 	</div>
 						<div class="row">
 						@if(Auth::check())
@@ -58,16 +58,13 @@
 										<button class="btn btn-default">Back to Dishes</button>
 									</a>
 							@else
-							<a href="{{ route('login') }}">
-								<button class="btn btn-default">Check out</button>
-							</a>
+								<a href="{{ route('login') }}">
+									<button class="btn btn-default">Check out</button>
+								</a>
 							@endif
 						@endif
 					  	<br>
 						</div>
-
-
-         
 
 </main>
 @endsection

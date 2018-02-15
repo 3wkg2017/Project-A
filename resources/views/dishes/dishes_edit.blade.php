@@ -10,8 +10,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('dishes_update', $dish->id) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
-
-
                         <div class="form-group{{ $errors->has('dish_name') ? ' has-error' : '' }}">
                             <label for="dish_name" class="col-md-4 control-label" >Dish name</label>
 
@@ -45,11 +43,10 @@
                             <label for="dish_description" class="col-md-4 control-label">Dish Description</label>
 
                          <div class="col-md-6">
-                           
+
                                 <textarea id="dish_description"  type="text" class="form-control" name="dish_description" required>
                               {{ old('dish_description', $dish->dish_description) }}
                             	</textarea>
-                                   
 
                                 @if ($errors->has('dish_description'))
                                     <span class="help-block">
@@ -60,7 +57,7 @@
                         </div>
 
    						 <div class="form-group{{ $errors->has('dish_picture') ? ' has-error' : '' }}">
-							<img id="editable_image" class="card-img-top img-responsive center-block" src="{{$dish->dish_picture}}" alt=""> 
+							<img id="editable_image" class="card-img-top img-responsive center-block" src="{{$dish->dish_picture}}" alt="">
 							<br />
                             <label for="dish_picture" class="col-md-4 control-label">New Dish picture</label>
 
@@ -93,7 +90,7 @@
 @section('js')
 <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
   <script>
-    console.log('test');
+    // console.log('test');
     CKEDITOR.replace( 'dish_description' );
   </script>
 @endsection

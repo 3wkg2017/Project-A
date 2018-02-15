@@ -36,7 +36,7 @@ protected function validator(Request $request)
     public function index()
     {
         if(Auth::check()){
-          $reservations = Reservation::paginate(15);
+          $reservations = Reservation::orderBy('date', 'desc')->paginate(15);
           $user = Auth::user();
            return view('reservations.index', [
                'reservations' => $reservations,
@@ -62,7 +62,7 @@ protected function validator(Request $request)
 
 
         return view('reservations.create', [
-        'user' => $user, 
+        'user' => $user,
         'today' => $today
         ]);
     }

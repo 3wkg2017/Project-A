@@ -61,6 +61,7 @@
 
                             <div class="col-md-6">
                                 <input id="dish_picture" type="file" class="form-control" name="dish_picture" value="{{ old('dish_picture') }}" required autofocus>
+                                <img src="" id="profile-img-tag" width="200px" />
 
                                 @if ($errors->has('dish_picture'))
                                     <span class="help-block">
@@ -69,7 +70,6 @@
                                 @endif
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -85,4 +85,21 @@
     </div>
 </div>
 
+@endsection
+@section('js')
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#dish_picture").change(function(){
+        readURL(this);
+    });
+</script>
 @endsection

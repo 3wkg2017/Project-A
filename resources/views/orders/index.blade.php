@@ -1,11 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-
-@if(Auth::check()) 
-
+@if(Auth::check())
 <div id="orders" class="container-fluid text-center">
-
+				<p>Orders</p>
 				<table class="table table-striped table-dark table-bordered table-responsive">
 					<thead class="blue-grey lighten-4">
 					<tr>
@@ -17,7 +15,7 @@
 						<th class="thead-dark">Tax Amount</th>
 						<th class="thead-dark">Date</th>
 
-						@if(Auth::check() && Auth::user()->role == 'admin')
+						@if(Auth::user()->role == 'admin')
 							<th>
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 							</th>
@@ -35,56 +33,33 @@
 							<td>
 								{{$loop->iteration}}
 							</td>
-							
+
 							<td>
-									
 									@foreach($order->carts as $cart)
 									<p>
 										<a href="{{ route('showOneDish', $cart->dishes->id) }}">{{ $cart->dishes->dish_name }}</a>
 									</p>
 									@endforeach
-		
 							</td>
 
-<!-- 
-								<td>
-								{{ $order->user->name }}
-								</td>
-								<td>
-								{{ $order->user->address }}
-								</td> -->
-							
-
-							@if(Auth::check() && Auth::user()->role == 'admin')
 								<td>
 								{{ $order->user->name }}
 								</td>
 								<td>
 								{{ $order->user->address }}
 								</td>
-							@else
+
 								<td>
-								{{ $user->name }}
+									{{$order->total_amount}}
 								</td>
 								<td>
-								{{ $user->address }}
+									{{$order->tax_amount}}
 								</td>
-							@endif
-							
+								<td>
+									{{$order->created_at}}
+								</td>
 
-							
-							<td>
-								{{$order->total_amount}}
-							</td>
-							<td>
-								{{$order->tax_amount}}
-							</td>
-							<td>
-								{{$order->created_at}}
-							</td>
-
-
-						@if(Auth::check() && Auth::user()->role == 'admin')
+						@if(Auth::user()->role == 'admin')
 							<td>
 								<a href="{{ route('orders.edit', $order->id) }}">
 									<button class="btn btn-success">Edit</button>
@@ -97,7 +72,7 @@
 				    				{{ csrf_field() }}
 				    			<button class="btn btn-danger">Delete</button>
 							</form>
-							
+
 							</td>
 
 						@endif
@@ -114,4 +89,5 @@
 					</div>
 </div>
 @endif
+
 @endsection

@@ -2,7 +2,7 @@
 @section('content')
 
 <div id="reservations" class="container-fluid text-center">
-
+			<p>Reservations</p>
 				<table class="table table-striped table-dark table-bordered table-responsive">
 					<thead class="thead-dark">
 					<tr>
@@ -48,7 +48,7 @@
 
 
 						@if(Auth::check() && Auth::user()->role == 'admin')
-							
+
              				<td>
 								<a href="{{ route('reservations.edit', $reservation) }}">
 									<button class="btn btn-success">Edit</button>

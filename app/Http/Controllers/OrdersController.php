@@ -18,7 +18,6 @@ class OrdersController extends Controller
      */
     public function index()
     {
-
         if(Auth::check()){
           if(Auth::user()->role == 'user'){   // user
               $user = Auth::user();
@@ -27,16 +26,15 @@ class OrdersController extends Controller
                      'orders' => $orders,
                      'user' => $user
                   ]);
-          }  
+          }
           else {                        // admin
               $orders = Order::paginate(15);
+               // dd($orders[0]->user->name);
               return view('orders.index', [
                      'orders' => $orders,
                   ]);
           }
         }
-
-      
     }
 
 
@@ -66,6 +64,7 @@ class OrdersController extends Controller
 
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->get();
 
+        // pakeisti i helperio klases metodus
         $total_amount = 0;
         foreach($carts as $cart){
             $dish = $cart->dishes;
@@ -84,11 +83,7 @@ class OrdersController extends Controller
         $order = Order::create($orderToSave);
         $order_id = $order->id;
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->update(['order_id' =>  $order_id]);
-        
-       
       return redirect()->route('orders.index');
-
-      
     }
 
     /**
@@ -143,8 +138,8 @@ class OrdersController extends Controller
         $carts = Cart::where('order_id', $order)->get(); // many Carts
         $dishName = [];
         foreach($carts as $cart){
-            $dishName = $cart->dishes->dish_name;    
-            array_push($dishContainer, $dishName); 
+            $dishName = $cart->dishes->dish_name;
+            array_push($dishContainer, $dishName);
         }
         return $dishContainer;
     }

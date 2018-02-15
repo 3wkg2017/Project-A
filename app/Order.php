@@ -17,7 +17,7 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\User');
     }
 
 
@@ -25,7 +25,7 @@ class Order extends Model
     // 	 return $this->hasManyThrough(
     //         'App\Dishes',
     //         'App\Cart',
-    //         'order_id', 
+    //         'order_id',
     //         'id',
     //         'dish_id'
     //     );

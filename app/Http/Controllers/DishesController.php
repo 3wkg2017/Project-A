@@ -26,25 +26,33 @@ class DishesController extends Controller
 
   public function index()
     {
-      
-       $dishes = Dishes::paginate(6);
+      // $dishes = Dishes::orderBy('dish_price', 'desc')->paginate(6);
+        $dishes = Dishes::paginate(6);
         return view('welcome', [
             'dishes' => $dishes
         ]);
     }
 
+    public function reorder()
+      {
+        $dishes = Dishes::orderBy('dish_price', 'desc')->paginate(6);
+         // $dishes = Dishes::paginate(6);
+          return view('welcome', [
+              'dishes' => $dishes
+          ]);
+      }
 
     public function dishesByCart($id)
     {
         return $dishes = Dishes::findOrFail('$id');
     }
 
-    protected function validator(Request $data) 
+    protected function validator(Request $data)
     {
         return Validator::make($data->all(), [
             'dish_name' => 'required|string|max:127',
             'dish_price' => 'required|numeric|max:10',
-            'dish_description' => 'required|string|max:255', 
+            'dish_description' => 'required|string|max:255',
             'dish_picture' => 'required|string|max:127',
         ]);
     }
@@ -59,7 +67,7 @@ class DishesController extends Controller
     {
         return view('dishes.dishes_create');
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -131,14 +139,14 @@ class DishesController extends Controller
         if(!isset($post['dish_picture'])){ // old web link
             $dishToSave->update($post);
         } else { // new image from PC
-            $path = $data->file('dish_picture')->storePublicly('public/dishes'); 
+            $path = $data->file('dish_picture')->storePublicly('public/dishes');
             $path = $this->pathModificator($path, 's');
             $post['dish_picture'] = $path;
             $dishToSave->update($post);
         }
         return redirect()->route('welcome');
          //return redirect()->route('dishes_show');
-      
+
     }
 
     /**
@@ -155,22 +163,21 @@ class DishesController extends Controller
    //     dump($path);
        Storage::disk('public')->delete($path);
        $dishToDestroy->delete();
-      
+
         return redirect()->route('welcome');
 
        //return redirect()->route('dishes_show');
     }
 
      public function pathModificator($path, $direction){
-       
+
         $path = explode('/', $path);
         if($direction == 'd'){
             $path[0] = '';
         } else {
-           $path[0] = '/storage';  
+           $path[0] = '/storage';
         }
         $path = implode('/', $path);
-        return $path;       
+        return $path;
         }
 }
-

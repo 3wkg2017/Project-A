@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div id="users" class="container-fluid text-center">
-
-				<table class="table table-striped table-dark table-bordered table-responsive">
+				<p>Users</p>
+				<table class="table table-striped table-dark table-bordered table-responsive table-sm">
 					<thead class="blue-grey lighten-4">
 					<tr>
 						<th class="thead-dark">User ID</th>

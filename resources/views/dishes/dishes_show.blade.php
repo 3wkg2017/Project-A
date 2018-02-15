@@ -1,42 +1,47 @@
+<div class="">
+	<a href="{{ route('dishes_reorder') }}">
+		<i class="fa fa-reorder fa-2x" aria-hidden="true"></i>
+	</a>
+</div>
+
 <div id="dishes" class="container-fluid text-center">
-  
+
 			@foreach($dishes->chunk(3) as $chunk)
             <div class="row">
                 @foreach($chunk as $dish)
-    			<div class="col-xs-12 col-md-4">
-    			<div class="card text-center center-block" style="width: 300px;">
-    			  <img class="img-responsive" style="max-width: 100%;"  src="{{$dish->dish_picture}}" alt="">
-                </div>
-    			  <div class="card-block">
-    			    <h4 class="card-title">{{$dish->dish_name}}</h4>
-    			    <p class="card-text">{!! $dish->dish_description !!}</p>
-    			  </div>
-    			  <div class="card-block">
-    			      <p class="card-text">{{$dish->dish_price}}</p>
-    			  	 <form class="cart_form" method="POST" action="{{route('carts.store')}}">
-    			  	  <button class="btn btn-danger bloody">Add to Cart</button>
-    			  	  	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-    			  	  	<input type="hidden" name="dish_id" value="{{$dish->id}}">
-    			  	 </form>
-    			  	 <br>
-    			  </div>
-    				@if(Auth::check() && Auth::user()->role == 'admin')
-    				<div class="card-block">
-    					<a href="{{ route('dishes_edit', $dish->id) }}">
-    						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-    					</a>
-    					<a href="{{route('dishes_destroy', $dish->id) }}">
-    						<i class="fa fa-trash-o" aria-hidden="true"></i>
-    					</a>
-    				</div>
-    			 @endif
-                </div>
+            			<div class="col-xs-12 col-md-4">
+            			<div class="card text-center center-block" style="width: 300px;">
+            			  <img class="img-responsive" style="max-width: 100%;"  src="{{$dish->dish_picture}}" alt="">
+                        </div>
+            			  <div class="card-block">
+            			    <h4 class="card-title">{{$dish->dish_name}}</h4>
+            			    <p class="card-text">{!! $dish->dish_description !!}</p>
+            			  </div>
+            			  <div class="card-block">
+            			      <p class="card-text">{{$dish->dish_price}}</p>
+            			  	 <form class="cart_form" method="POST" action="{{route('carts.store')}}">
+            			  	  <button class="btn btn-danger bloody">Add to Cart</button>
+            			  	  	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            			  	  	<input type="hidden" name="dish_id" value="{{$dish->id}}">
+            			  	 </form>
+            			  	 <br>
+            			  </div>
+            				@if(Auth::check() && Auth::user()->role == 'admin')
+            				<div class="card-block">
+            					<a href="{{ route('dishes_edit', $dish->id) }}">
+            						<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+            					</a>
+            					<a href="{{route('dishes_destroy', $dish->id) }}">
+            						<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+            					</a>
+
+            				</div>
+            			 @endif
+                  </div>
                 @endforeach
                 </div>
 			@endforeach
-    
-            {{ $dishes->render() }}
-
+      {{ $dishes->render() }}
 </div>
 
 @section('js')
