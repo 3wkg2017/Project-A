@@ -17,10 +17,11 @@
 						<th class="thead-dark">Tax Amount</th>
 						<th class="thead-dark">Date</th>
 
-						@if(Auth::user()->role == 'admin')
+						
 							<th>
-								<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						<i class="fa fa-check-square-o" aria-hidden="true"></i>
 							</th>
+						@if(Auth::user()->role == 'admin')
 							<th>
 								<i class="fa fa-trash-o" aria-hidden="true"></i>
 							</th>
@@ -61,13 +62,11 @@
 									{{$order->created_at}}
 								</td>
 
-						@if(Auth::user()->role == 'admin')
+						
 							<td>
-								<a href="{{ route('orders.edit', $order->id) }}">
-									<button class="btn btn-success">Edit</button>
-								</a>
+									{{$order->order_status}}
 							</td>
-
+							@if(Auth::user()->role == 'admin')
 							<td>
 							<form class="order_form" action="{{ route('orders.destroy', $order) }}" method="post" >
 									{{ method_field('DELETE') }}

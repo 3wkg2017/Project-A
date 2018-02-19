@@ -80,10 +80,13 @@ class OrdersController extends Controller
 
         $tax_amount = $total_amount*0.21;
 
+        $order_status = 'new';
+
         $orderToSave =[
             'tax_amount' => $tax_amount,
             'total_amount' => $total_amount,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'order_status' => $order_status
         ];
 
         $order = Order::create($orderToSave);
@@ -91,16 +94,16 @@ class OrdersController extends Controller
         $carts = Cart::whereNull('order_id')->where('token', $currentToken)->update(['order_id' =>  $order_id]);
 
 
-       // dd(url('accept'));
+       $total_amount = $total_amount * 100; // for Paysera Only
 
         try {
                // $self_url = get_self_url();
              
                 $request = WebToPay::redirectToPayment(array(
-                    'projectid'     => 111924,
-                    'sign_password' => 'cb8acb1dc9821bf74e6ca9068032d623',
-                    'orderid'       => 0,
-                    'amount'        => 1000,
+                    'projectid'     => env('PROJECT_ID'), 
+                    'sign_password' => env('SIGN_PASSWORD'),
+                    'orderid'       => $order_id,
+                    'amount'        => $total_amount,
                     'currency'      => 'EUR',
                     'country'       => 'LT',
                     'accepturl'     => url('accept'),
@@ -134,17 +137,27 @@ class OrdersController extends Controller
 
     public function accept()
     {
-         return view('payments.accept');
+       //
+        $orderId = $this->responser();
+
+        $order = Order::where('id', $orderId)
+            ->update(['order_status' => 'ordered' ]);
+
+        return view('payments.accept');
     }
 
     public function cancel()
     {
-         return view('payments.cancel');
+        return view('payments.cancel');
     }
 
     public function callback()
     {
-         return view('payments.callback');;
+        $orderId = $this->responser();
+        $order = Order::where('id', $orderId)
+            ->update(['order_status' => 'paid' ]);
+        return view('payments.accept');
+
     }
 
     /**
@@ -193,6 +206,29 @@ class OrdersController extends Controller
         }
         return $dishContainer;
     }
+
+    public function responser(){
+
+        try {
+        $response = WebToPay::checkResponse($_GET, array(
+        'projectid'     => env('PROJECT_ID'),
+        'sign_password' => env('SIGN_PASSWORD')
+        ));
+        
+
+
+        $orderId = $response['orderid'];
+        return $orderId;
+
+        echo 'OK';
+        } catch (Exception $e) {
+            echo get_class($e) . ': ' . $e->getMessage();
+        }
+ 
+    }
+
+    
+
 
 }
 
